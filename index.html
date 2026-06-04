@@ -104,6 +104,18 @@
     .emp-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; align-items: stretch; perspective: 1200px; }
     @media (max-width: 1200px) { .emp-cards { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
     @media (max-width: 760px) { .emp-head { margin-bottom: 40px; } .emp-lead { font-size: 15.5px; } }
+    /* Coming soon badge — shared across Voice, Bills, Fuel cards */
+    .coming-soon {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 10px; border-radius: 999px;
+      background: rgba(11,16,32,0.05); border: 1px solid rgba(11,16,32,0.10);
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #5a6478; white-space: nowrap;
+    }
+    .coming-soon::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: #94a3b8;
+    }
     .ecard {
       position: relative; display: flex; align-items: center; gap: 26px;
       padding: 30px 34px; border-radius: 24px; overflow: hidden; isolation: isolate;
@@ -489,6 +501,7 @@
           <div class="vc-body">
             <div class="vc-head-row">
               <h3>Voice Employee</h3>
+              <span class="coming-soon">Coming soon</span>
             </div>
             <div class="vc-subtitle">
               Answers, books, escalates. <span class="vc-italic">Your after-hours receptionist.</span>
@@ -546,7 +559,7 @@
           <div class="bls-body">
             <div class="bls-head-row">
               <h3>Bills Employee</h3>
-              <span class="bls-live">LIVE</span>
+              <span class="coming-soon">Coming soon</span>
             </div>
             <div class="bls-subtitle">
               Reads, codes, queues. <span class="bls-italic">Your one-tap bills inbox.</span>
@@ -615,7 +628,7 @@
           <div class="fuel-card-body">
             <div class="fuel-head-row">
               <h2>Fuel Employee</h2>
-              <span class="fuel-live"><i></i> Live</span>
+              <span class="coming-soon">Coming soon</span>
             </div>
 
             <p class="fuel-subtitle">Keeps every card current. <em>Even while the crew moves.</em></p>
