@@ -9,6 +9,7 @@ node_modules/
 # Local-only backup
 index.backup.html
 
-# Experiment videos — keep only the one the site actually uses
+# Experiment videos — keep only the ones the site actually uses
 assets/*.mp4
 !assets/hexpoo-teal5.mp4
+!assets/hexagon-float-v3.mp4

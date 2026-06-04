@@ -167,92 +167,88 @@
       .ecard.reveal.in { animation: none; }
     }
 
-    /* ====== Dashboard demo ====== */
-    .demo { position: relative; background: linear-gradient(180deg, #ffffff 0%, #f4f6fa 40%, #eef1f7 100%); padding: 90px 5vw 130px; }
-    .demo-wrap { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: minmax(280px, 0.78fr) 1.9fr; gap: 64px; align-items: center; }
+    /* ====== Future: Traditional vs AI comparison ====== */
+    .future { background: #ffffff; padding: 90px 6vw 100px; position: relative; }
+    .future-inner { max-width: 1300px; margin: 0 auto; position: relative; }
 
-    /* left copy */
-    .demo-copy { max-width: 460px; }
-    .demo-kicker { display: inline-flex; align-items: center; gap: 13px; font-size: 13px; font-weight: 800; letter-spacing: .34em; text-transform: uppercase; color: var(--muted); margin-bottom: 26px; }
-    .demo-kicker::before { content: ""; width: 30px; height: 2px; border-radius: 2px; background: var(--text); }
-    .demo-copy h2 { font-size: clamp(38px, 4.2vw, 60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; color: var(--text); }
-    .demo-copy h2 .serif { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.01em;
+    /* top: copy + floating video */
+    .future-top { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 24px; margin-bottom: 0; }
+    .future-head { margin-top: 36px; }
+    .future-kicker { display: inline-flex; align-items: center; gap: 13px; font-size: 13px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 22px; }
+    .future-kicker::before { content: ""; width: 30px; height: 2px; border-radius: 2px; background: var(--teal); }
+    .future-head h2 { font-size: clamp(32px, 3.6vw, 50px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.06; color: var(--text); }
+    .future-head h2 .serif { display: block; margin-top: 2px; font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.01em;
       background: linear-gradient(110deg, var(--teal), var(--teal-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .demo-copy p { margin-top: 24px; font-size: 17px; line-height: 1.65; color: #4a5468; max-width: 400px; }
-    .watch-btn { margin-top: 34px; display: inline-flex; align-items: center; gap: 13px; padding: 15px 26px 15px 16px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--text); font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 30px rgba(30,40,80,.08); transition: transform .2s, box-shadow .2s; }
-    .watch-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(30,40,80,.13); }
-    .watch-btn .play { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--teal), var(--teal-2)); color: #fff; }
-    .watch-btn .play svg { width: 14px; height: 14px; margin-left: 2px; }
+    .future-head p { margin-top: 22px; font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 400px; }
+    .future-hex { display: flex; align-items: center; justify-content: center; }
+    .future-hex video { width: min(420px, 100%); height: auto; display: block; mix-blend-mode: multiply; }
 
-    /* dashboard panel */
-    .dash { display: grid; grid-template-columns: 84px 1fr; background: linear-gradient(160deg, #ffffff, #fbfcfe); border: 1px solid rgba(20,30,60,.07); border-radius: 26px; overflow: hidden;
-      box-shadow: 0 40px 90px -30px rgba(30,45,90,.30), 0 8px 24px rgba(30,45,90,.06); }
+    /* hexagon header / cta icons */
+    .hexico { width: 46px; height: 46px; flex: 0 0 auto; display: grid; place-items: center; position: relative;
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+    .hexico svg { width: 20px; height: 20px; position: relative; z-index: 1; }
+    .hexico.grey { background: #e9ebef; color: #9aa4b6; }
+    .hexico.teal { background: linear-gradient(150deg, var(--teal-2), var(--teal)); color: #fff; }
+    .hexico.outline { background: linear-gradient(150deg, var(--teal-2), var(--teal)); color: var(--teal); }
+    .hexico.outline::before { content: ""; position: absolute; inset: 2px; background: #fff; clip-path: inherit; }
 
-    .dash-side { display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 24px 0; border-right: 1px solid rgba(20,30,60,.06); background: rgba(248,250,253,.6); }
-    .dash-logo { display: flex; align-items: center; }
-    .dash-logo svg { width: 30px; height: 30px; }
-    .dash-logo span { display: none; }
-    .dash-nav { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; flex: 1; }
-    .dash-nav a { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: #9aa4b6; cursor: pointer; transition: background .2s, color .2s; }
-    .dash-nav a svg { width: 20px; height: 20px; }
-    .dash-nav a:hover { color: #5a6478; background: rgba(20,30,60,.04); }
-    .dash-nav a.active { color: var(--teal); background: color-mix(in srgb, var(--teal) 13%, white); }
-    .dash-nav a.bottom { margin-top: auto; }
+    /* comparison grid */
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; position: relative; }
+    .vs-card { border-radius: 24px; padding: 28px 28px 26px; background: #ffffff; }
+    .vs-card.trad { border: 1px solid rgba(20,30,60,.08); box-shadow: 0 18px 44px -28px rgba(30,45,90,.22); }
+    .vs-card.ai { border: 1px solid color-mix(in srgb, var(--teal) 26%, transparent);
+      background: linear-gradient(165deg, color-mix(in srgb, var(--teal) 5%, white), #ffffff 60%);
+      box-shadow: 0 26px 56px -28px color-mix(in srgb, var(--teal) 55%, transparent); }
+    .vs-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .vs-head h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
+    .vs-head .vsub { margin-top: 2px; font-size: 13px; color: var(--muted); }
+    .vs-card.ai .vs-head .vsub { color: var(--teal); font-weight: 500; }
+    .vs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .vs-row { display: flex; align-items: center; gap: 13px; padding: 13px 15px; border-radius: 13px; }
+    .vs-row .ri { flex: 0 0 auto; width: 20px; height: 20px; display: grid; place-items: center; }
+    .vs-row .ri svg { width: 18px; height: 18px; }
+    .vs-row .rl { flex: 1 1 auto; min-width: 0; font-size: 14px; font-weight: 500; }
+    .vs-row .rm { flex: 0 0 auto; width: 18px; height: 18px; display: grid; place-items: center; }
+    .vs-row .rm svg { width: 17px; height: 17px; }
+    .vs-card.trad .vs-row { background: #f4f5f7; }
+    .vs-card.trad .vs-row .ri { color: #9aa4b6; }
+    .vs-card.trad .vs-row .rl { color: #5a6478; }
+    .vs-card.trad .vs-row .rm { color: #bcc2cc; }
+    .vs-card.ai .vs-row { background: color-mix(in srgb, var(--teal) 7%, white); }
+    .vs-card.ai .vs-row .ri { color: var(--teal); }
+    .vs-card.ai .vs-row .rl { color: #2a3346; }
+    .vs-card.ai .vs-row .rm { color: var(--teal); }
 
-    .dash-main { padding: 28px 30px 30px; min-width: 0; }
-    .dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
-    .dash-head h3 { font-size: 25px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
-    .dash-head p { margin-top: 4px; font-size: 14px; color: var(--muted); }
-    .dash-head-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .pill-live { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #3c4660; padding: 8px 15px; border-radius: 999px; border: 1px solid var(--line); background: #fff; }
-    .pill-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 0 rgba(15,179,158,.5); animation: livePulse 2s infinite; }
-    @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(15,179,158,.5); } 70% { box-shadow: 0 0 0 7px rgba(15,179,158,0); } 100% { box-shadow: 0 0 0 0 rgba(15,179,158,0); } }
-    .pill-week { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: #3c4660; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; }
-    .pill-week svg { width: 14px; height: 14px; color: var(--muted); }
+    /* VS badge + connector */
+    .vs-badge { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3;
+      width: 54px; height: 54px; border-radius: 50%; background: #fff; border: 1px solid var(--line);
+      box-shadow: 0 10px 24px -8px rgba(30,45,90,.22); display: grid; place-items: center;
+      font-size: 13px; font-weight: 800; letter-spacing: .04em; color: #8a93a3; }
+    .vs-badge::before, .vs-badge::after { content: ""; position: absolute; top: 50%; transform: translateY(-50%); width: 24px; height: 2px;
+      background: repeating-linear-gradient(90deg, var(--teal) 0 4px, transparent 4px 9px); opacity: .7; }
+    .vs-badge::before { right: 100%; margin-right: 4px; }
+    .vs-badge::after { left: 100%; margin-left: 4px; }
 
-    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 26px; }
-    .stat { position: relative; border-radius: 18px; padding: 16px 16px 0; overflow: hidden; background: linear-gradient(160deg, color-mix(in srgb, var(--c) 7%, white), #ffffff 70%); border: 1px solid color-mix(in srgb, var(--c) 14%, transparent); min-width: 0; }
-    .stat-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-    .stat-label { font-size: 12.5px; font-weight: 600; color: #5a6478; line-height: 1.3; }
-    .stat-up { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; font-size: 11px; font-weight: 800; color: #16a34a; background: rgba(22,163,74,.1); padding: 3px 7px; border-radius: 999px; }
-    .stat-up svg { width: 11px; height: 11px; }
-    .stat-num { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin: 8px 0 6px; font-variant-numeric: tabular-nums; }
-    .spark { display: block; width: 100%; height: 46px; }
-    .spark-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1); }
-    .spark-area { opacity: 0; transition: opacity 1.2s ease .3s; }
-    .dash.play .spark-line { stroke-dashoffset: 0; }
-    .dash.play .spark-area { opacity: 1; }
-
-    .dash-cols { display: grid; grid-template-columns: 1.25fr 1fr; gap: 26px; }
-    .dash-cols h4 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin-bottom: 14px; }
-    .activity ul, .emps ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-    .activity li { display: flex; align-items: center; gap: 12px; padding: 11px 8px; border-radius: 12px; transition: background .2s; }
-    .activity li:hover { background: rgba(20,30,60,.03); }
-    .aico { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: color-mix(in srgb, var(--c) 13%, white); color: var(--c); }
-    .aico svg { width: 17px; height: 17px; }
-    .atext { flex: 1 1 auto; min-width: 0; font-size: 13.5px; color: #3c4660; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .atag { flex: 0 0 auto; font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; color: var(--c); background: color-mix(in srgb, var(--c) 12%, white); }
-    .atime { flex: 0 0 auto; font-size: 12px; color: #9aa4b6; font-variant-numeric: tabular-nums; min-width: 48px; text-align: right; }
-    .view-all { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; padding-left: 8px; font-size: 13px; font-weight: 700; color: var(--teal); text-decoration: none; }
-    .view-all svg { width: 14px; height: 14px; }
-
-    .emps li { display: flex; align-items: center; gap: 12px; padding: 11px 8px; }
-    .emps .ebody { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-    .emps .ebody b { font-size: 14px; font-weight: 600; color: var(--text); }
-    .emps .ebody i { font-style: normal; font-size: 12px; color: #16a34a; font-weight: 600; }
-    .toggle { flex: 0 0 auto; width: 40px; height: 23px; border-radius: 999px; background: #d7dbe3; position: relative; transition: background .25s; }
-    .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 17px; height: 17px; border-radius: 50%; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.2); transition: transform .25s; }
-    .toggle.on { background: var(--c); }
-    .toggle.on::after { transform: translateX(17px); }
-
-    @media (max-width: 980px) {
-      .demo-wrap { grid-template-columns: 1fr; gap: 40px; }
-      .demo-copy { max-width: none; text-align: center; }
-      .demo-copy p { margin-left: auto; margin-right: auto; }
-      .demo-kicker { justify-content: center; }
-    }
+    /* bottom CTA bar */
+    .future-cta { margin-top: 30px; display: flex; align-items: center; gap: 22px; padding: 26px 32px; border-radius: 22px;
+      background: linear-gradient(160deg, #ffffff, #fafbfc); border: 1px solid rgba(20,30,60,.08); box-shadow: 0 16px 44px -28px rgba(30,45,90,.22); }
+    .future-cta .cta-copy { flex: 1 1 auto; min-width: 0; }
+    .future-cta .cta-copy b { display: block; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
+    .future-cta .cta-copy p { margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 520px; }
+    .future-cta .cta-link { margin-left: auto; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 9px; color: var(--teal); font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; transition: gap .2s; }
+    .future-cta .cta-link:hover { gap: 13px; }
+    .future-cta .cta-link svg { width: 18px; height: 18px; }
 
     @media (max-width: 760px) {
+      .future { padding: 60px 20px 70px; }
+      .future-top { grid-template-columns: 1fr; gap: 22px; margin-top: 0; margin-bottom: 36px; }
+      .future-head { margin-top: 0; }
+      .future-head p { max-width: none; }
+      .future-hex video { width: 70vw; max-width: 300px; }
+      .vs-grid { grid-template-columns: 1fr; gap: 64px; }
+      .vs-badge::before, .vs-badge::after { display: none; }
+      .future-cta { flex-direction: column; align-items: flex-start; gap: 14px; padding: 24px; }
+      .future-cta .cta-link { margin-left: 0; }
       nav { padding: 14px 20px; }
       .stage { height: auto; }
       .stage-pin { position: static; height: auto; padding: 86px 0 30px; overflow: visible; }
@@ -267,18 +263,6 @@
       .emp-cards { grid-template-columns: 1fr; }
       .ecard { gap: 16px; padding: 22px; }
       .ecard p { max-width: none; }
-
-      .demo { padding: 60px 20px 90px; }
-      .dash { grid-template-columns: 1fr; border-radius: 20px; }
-      .dash-side { flex-direction: row; justify-content: space-between; gap: 4px; padding: 14px 16px; border-right: none; border-bottom: 1px solid rgba(20,30,60,.06); }
-      .dash-nav { flex-direction: row; flex: 0 1 auto; gap: 2px; }
-      .dash-nav a.bottom { margin-top: 0; }
-      .dash-nav a { width: 36px; height: 36px; }
-      .dash-main { padding: 20px 16px 22px; }
-      .dash-head h3 { font-size: 21px; }
-      .dash-head-right { flex-direction: column; align-items: flex-end; gap: 7px; }
-      .stat-grid { grid-template-columns: repeat(2, 1fr); }
-      .dash-cols { grid-template-columns: 1fr; gap: 28px; }
     }
   </style>
 </head>
@@ -568,126 +552,64 @@
     </div>
   </section>
 
-  <!-- ====== Dashboard demo ====== -->
-  <section class="demo">
-    <!-- shared sparkline gradients -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <defs>
-        <linearGradient id="spk-rev" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".30"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></linearGradient>
-        <linearGradient id="spk-voice" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6" stop-opacity=".30"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>
-        <linearGradient id="spk-bills" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f59e0b" stop-opacity=".30"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></linearGradient>
-        <linearGradient id="spk-leads" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10b981" stop-opacity=".30"/><stop offset="1" stop-color="#10b981" stop-opacity="0"/></linearGradient>
-      </defs>
-    </svg>
-
-    <div class="demo-wrap">
-      <!-- left: copy -->
-      <div class="demo-copy reveal">
-        <span class="demo-kicker">Fylo</span>
-        <h2>Your AI<br/>workforce.<br/><span class="serif">Always working.</span></h2>
-        <p>Fylo AI employees handle the admin, follow-up, and operations. So you can focus on the work that actually matters.</p>
-        <button class="watch-btn" type="button">
-          <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-          Watch Demo
-        </button>
+  <!-- The future: Traditional vs AI comparison -->
+  <section class="future">
+    <div class="future-inner">
+      <div class="future-top">
+        <div class="future-head reveal">
+          <span class="future-kicker">The Future of Trade Businesses</span>
+          <h2>The Businesses Adopting AI Today <span class="serif">Will Lead Tomorrow.</span></h2>
+          <p>The gap between AI-powered businesses and everyone else is growing every day.</p>
+        </div>
+        <div class="future-hex">
+          <video src="assets/hexagon-float-v3.mp4" autoplay loop muted playsinline preload="auto"></video>
+        </div>
       </div>
 
-      <!-- right: dashboard panel -->
-      <div class="dash reveal" id="dash">
-        <aside class="dash-side">
-          <div class="dash-logo">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-              <path fill="url(#hexg)" fill-rule="evenodd" stroke="url(#hexg)" stroke-width="4" stroke-linejoin="round"
-                d="M50 4 L89.8 27 L89.8 73 L50 96 L10.2 73 L10.2 27 Z M50 33 L65.6 42 L65.6 58 L50 67 L34.4 58 L34.4 42 Z" />
-            </svg>
-            <span>fylo<span class="dot">.</span></span>
+      <div class="vs-grid reveal">
+        <!-- Traditional -->
+        <div class="vs-card trad">
+          <div class="vs-head">
+            <span class="hexico grey"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M3 9h18"/><path d="M9 20v-5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5"/></svg></span>
+            <div><h3>Traditional Business</h3><div class="vsub">Stuck in the day-to-day.</div></div>
           </div>
-          <div class="dash-nav">
-            <a class="active" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
-            <a aria-label="Team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></a>
-            <a aria-label="Messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></a>
-            <a aria-label="Documents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
-            <a aria-label="Calls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
-            <a aria-label="Reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></a>
-            <a class="bottom" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></a>
+          <ul class="vs-list">
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span class="rl">Missed calls</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="rl">Leads fall through the cracks</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="rl">Reviews rarely requested</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="rl">Invoices done manually</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="rl">Admin after hours</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 16.5 8.5 11.5 1 19"/><polyline points="17 6 23 6 23 12"/></svg></span><span class="rl">Owner stuck in operations</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></li>
+          </ul>
+        </div>
+
+        <!-- AI Powered -->
+        <div class="vs-card ai">
+          <div class="vs-head">
+            <span class="hexico teal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l1.9 6.6 6.6 1.9-6.6 1.9L12 19.2l-1.9-6.6L3.5 10.7l6.6-1.9z"/></svg></span>
+            <div><h3>AI Powered Business</h3><div class="vsub">Automated, efficient, and built for growth.</div></div>
           </div>
-        </aside>
+          <ul class="vs-list">
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span class="rl">Calls answered automatically</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="rl">Leads followed up instantly</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="rl">Reviews requested automatically</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="rl">Invoices filed automatically</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="rl">Admin handled 24/7</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></li>
+            <li class="vs-row"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 16.5 8.5 11.5 1 19"/><polyline points="17 6 23 6 23 12"/></svg></span><span class="rl">Owner focused on growth</span><span class="rm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></li>
+          </ul>
+        </div>
 
-        <main class="dash-main">
-          <header class="dash-head">
-            <div>
-              <h3>Dashboard</h3>
-              <p>Your AI employees at work</p>
-            </div>
-            <div class="dash-head-right">
-              <span class="pill-live"><i></i>Live</span>
-              <span class="pill-week">This Week
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </span>
-            </div>
-          </header>
+        <div class="vs-badge">VS</div>
+      </div>
 
-          <div class="stat-grid">
-            <div class="stat" style="--c:#8b5cf6">
-              <div class="stat-top"><span class="stat-label">Reviews Generated</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>32%</span></div>
-              <div class="stat-num" data-target="47">0</div>
-              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
-                <path class="spark-area" fill="url(#spk-rev)" d="M0,48 C24,44 36,52 60,40 S96,46 120,30 156,34 180,20 210,16 220,10 L220,64 L0,64 Z"/>
-                <path class="spark-line" fill="none" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,48 C24,44 36,52 60,40 S96,46 120,30 156,34 180,20 210,16 220,10"/>
-              </svg>
-            </div>
-            <div class="stat" style="--c:#3b82f6">
-              <div class="stat-top"><span class="stat-label">Calls Answered</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>41%</span></div>
-              <div class="stat-num" data-target="63">0</div>
-              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
-                <path class="spark-area" fill="url(#spk-voice)" d="M0,40 C28,46 40,30 64,34 S96,22 120,32 150,42 176,26 206,18 220,24 L220,64 L0,64 Z"/>
-                <path class="spark-line" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,40 C28,46 40,30 64,34 S96,22 120,32 150,42 176,26 206,18 220,24"/>
-              </svg>
-            </div>
-            <div class="stat" style="--c:#f59e0b">
-              <div class="stat-top"><span class="stat-label">Invoices Processed</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>28%</span></div>
-              <div class="stat-num" data-target="112">0</div>
-              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
-                <path class="spark-area" fill="url(#spk-bills)" d="M0,50 C24,48 36,44 60,46 S94,30 120,36 152,40 178,22 208,28 220,14 L220,64 L0,64 Z"/>
-                <path class="spark-line" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,50 C24,48 36,44 60,46 S94,30 120,36 152,40 178,22 208,28 220,14"/>
-              </svg>
-            </div>
-            <div class="stat" style="--c:#10b981">
-              <div class="stat-top"><span class="stat-label">Leads Followed Up</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>36%</span></div>
-              <div class="stat-num" data-target="28">0</div>
-              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
-                <path class="spark-area" fill="url(#spk-leads)" d="M0,46 C24,42 38,48 60,38 S92,40 118,28 150,32 178,30 206,16 220,20 L220,64 L0,64 Z"/>
-                <path class="spark-line" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,46 C24,42 38,48 60,38 S92,40 118,28 150,32 178,30 206,16 220,20"/>
-              </svg>
-            </div>
-          </div>
-
-          <div class="dash-cols">
-            <div class="activity">
-              <h4>Recent Activity</h4>
-              <ul>
-                <li><span class="aico" style="--c:#8b5cf6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="atext">Review request sent to Sarah M.</span><span class="atag" style="--c:#8b5cf6">Reviews</span><span class="atime">9:02am</span></li>
-                <li><span class="aico" style="--c:#3b82f6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span><span class="atext">Missed call from 03 123 4567 answered</span><span class="atag" style="--c:#3b82f6">Voice</span><span class="atime">9:06am</span></li>
-                <li><span class="aico" style="--c:#f59e0b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="atext">Supplier invoice from Bunnings filed to Xero</span><span class="atag" style="--c:#f59e0b">Bills</span><span class="atime">9:18am</span></li>
-                <li><span class="aico" style="--c:#10b981"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="atext">New lead from website replied</span><span class="atag" style="--c:#10b981">Leads</span><span class="atime">9:31am</span></li>
-                <li><span class="aico" style="--c:#8b5cf6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="atext">5 star review received from Tom R.</span><span class="atag" style="--c:#8b5cf6">Reviews</span><span class="atime">9:44am</span></li>
-              </ul>
-              <a class="view-all" href="#">View all activity
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-            </div>
-
-            <div class="emps">
-              <h4>Your Employees</h4>
-              <ul>
-                <li><span class="aico" style="--c:#8b5cf6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="ebody"><b>Reviews Employee</b><i>Active</i></span><span class="toggle on" style="--c:#8b5cf6"></span></li>
-                <li><span class="aico" style="--c:#3b82f6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span><span class="ebody"><b>Voice Employee</b><i>Active</i></span><span class="toggle on" style="--c:#3b82f6"></span></li>
-                <li><span class="aico" style="--c:#f59e0b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="ebody"><b>Bills Employee</b><i>Active</i></span><span class="toggle on" style="--c:#f59e0b"></span></li>
-                <li><span class="aico" style="--c:#10b981"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="ebody"><b>Leads Employee</b><i>Active</i></span><span class="toggle on" style="--c:#10b981"></span></li>
-              </ul>
-            </div>
-          </div>
-        </main>
+      <!-- bottom CTA -->
+      <div class="future-cta reveal">
+        <span class="hexico outline"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l1.9 6.6 6.6 1.9-6.6 1.9L12 19.2l-1.9-6.6L3.5 10.7l6.6-1.9z"/></svg></span>
+        <div class="cta-copy">
+          <b>The future belongs to businesses that embrace AI.</b>
+          <p>Fylo gives you the AI employees you need to save time, impress customers and grow.</p>
+        </div>
+        <a class="cta-link" href="#">Book a demo today <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
   </section>
@@ -783,31 +705,6 @@
         }, 320);
       }, 6000);
     })();
-
-    // dashboard: draw sparklines + count numbers up when it enters view
-    const dash = document.getElementById('dash');
-    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-    function countUp(el) {
-      const target = parseInt(el.dataset.target, 10) || 0;
-      const dur = 1400, start = performance.now();
-      function step(now) {
-        const p = Math.min((now - start) / dur, 1);
-        el.textContent = Math.round(easeOut(p) * target).toLocaleString();
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-    if (dash) {
-      const dashIO = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          dash.classList.add('play');
-          dash.querySelectorAll('.stat-num').forEach(countUp);
-          dashIO.unobserve(e.target);
-        });
-      }, { threshold: 0.3 });
-      dashIO.observe(dash);
-    }
   </script>
 </body>
 </html>
