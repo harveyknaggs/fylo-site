@@ -317,6 +317,29 @@
       .coming-soon { padding: 3px 9px; font-size: 9.5px; }
     }
 
+    /* ====== Page loader (Fylo hex dots) ====== */
+    .fylo-loader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      background: #ffffff;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    .fylo-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .fl-dots { display: flex; gap: 14px; }
+    .fl-dots span {
+      width: 18px; height: 21px;
+      background: linear-gradient(150deg, var(--teal-2), var(--teal));
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+      animation: fl-bounce 1.2s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .fl-dots span:nth-child(2) { animation-delay: .15s; }
+    .fl-dots span:nth-child(3) { animation-delay: .30s; }
+    @keyframes fl-bounce {
+      0%, 80%, 100% { transform: translateY(0) scale(.85); opacity: .55; }
+      40% { transform: translateY(-14px) scale(1); opacity: 1; }
+    }
+
     /* Shared dark-theme tokens for CTA + footer */
     .aurora-cta-section, .foot {
       --foot-display: "Fraunces", "Times New Roman", serif;
@@ -419,6 +442,26 @@
   </style>
 </head>
 <body>
+
+  <!-- Page loader -->
+  <div class="fylo-loader" id="fyloLoader" aria-hidden="true">
+    <div class="fl-dots"><span></span><span></span><span></span></div>
+  </div>
+  <script>
+    (function () {
+      var loader = document.getElementById('fyloLoader');
+      if (!loader) return;
+      var hide = function () { loader.classList.add('is-hidden'); };
+      // Hide once everything (incl. the heavy hero video) has loaded.
+      if (document.readyState === 'complete') {
+        setTimeout(hide, 400);
+      } else {
+        window.addEventListener('load', function () { setTimeout(hide, 400); });
+      }
+      // Failsafe — never trap the user behind the loader for more than 3s.
+      setTimeout(hide, 3000);
+    })();
+  </script>
 
   <nav>
     <div class="brand">
