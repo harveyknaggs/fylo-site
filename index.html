@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fylo</title>
+  <link rel="icon" href="assets/hexagon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0b1020;
+      --muted: #5a6478;
+      --line: rgba(11,16,32,.08);
+      --teal: #0fb39e;
+      --teal-2: #2bd6b2;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 18px 40px;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.7);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .brand svg { width: 33px; height: 33px; display: block; }
+    .brand .wordmark { font-family: "Poppins", "Inter", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: #1e2d3d; line-height: 1; }
+    .brand .wordmark .dot { color: var(--teal); }
+
+    /* ====== Pinned stage: spinning hexagon + cross-fading WORDS ====== */
+    .stage { position: relative; height: 240vh; background: var(--bg); }
+    .stage-pin { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+    .stage-grid { position: relative; height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 4vw; }
+
+    /* left: two word layers that cross-fade in place (centered, beside the hexagon) */
+    .stage-text { position: absolute; top: 0; bottom: 0; left: 0; width: min(52vw, 620px); }
+    .text-layer { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 24px 0 6vw; }
+    .emp-layer { opacity: 0; }
+
+    .kicker, .emp-kicker {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-size: 26px; font-weight: 800; letter-spacing: .42em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 22px;
+    }
+    .kicker::before, .emp-kicker::before {
+      content: ""; width: 34px; height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-2));
+    }
+
+    .hero-layer h1 { font-size: clamp(34px, 4.8vw, 62px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: var(--text); }
+    .hero-layer h1 .grad {
+      font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.005em; padding-right: .06em;
+      background: linear-gradient(110deg, var(--teal), var(--teal-2)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-layer p { margin-top: 22px; font-size: clamp(16px, 1.5vw, 20px); color: #3c4660; max-width: 480px; font-weight: 450; line-height: 1.6; }
+
+    .emp-layer h2 { font-size: clamp(40px, 5vw, 70px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.0; color: var(--text); }
+    .emp-layer h2 .serif {
+      display: block; font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.01em; padding-right: .06em;
+      background: linear-gradient(110deg, var(--teal), var(--teal-2)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .emp-layer .emp-sub { margin-top: 22px; color: #3c4660; font-size: 18px; line-height: 1.6; max-width: 430px; }
+
+    /* right: spinning hexagon */
+    .stage-hex { display: flex; align-items: center; justify-content: center; }
+    .stage-hex video { width: auto; height: 84vh; max-width: 72vw; object-fit: contain; mix-blend-mode: multiply; }
+
+    .scroll-hint {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+      z-index: 50; color: var(--muted); font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      animation: float 2s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 7px); } }
+
+    /* ====== Cards: directly under the heading ====== */
+    .employees { position: relative; z-index: 2; background: #ffffff; margin-top: 0; padding: 20px 6vw 140px; }
+    .emp-grid { max-width: 1280px; margin: 0 auto; }
+    .emp-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 44px; align-items: stretch; perspective: 1200px; }
+    .ecard {
+      position: relative; display: flex; align-items: center; gap: 26px;
+      padding: 30px 34px; border-radius: 24px; overflow: hidden; isolation: isolate;
+      /* frosted glass base with a soft top-left sheen */
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,0) 34%),
+        linear-gradient(140deg, rgba(255,255,255,.82), rgba(255,255,255,.5));
+      backdrop-filter: blur(22px) saturate(1.25); -webkit-backdrop-filter: blur(22px) saturate(1.25);
+      border: 1px solid rgba(255,255,255,.9);
+      /* pop off the page */
+      box-shadow: 0 34px 64px rgba(30,40,80,.16), 0 4px 12px rgba(30,40,80,.06), inset 0 1px 1px rgba(255,255,255,1);
+      transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .4s ease;
+    }
+    .ecard:hover { transform: translateY(-14px) scale(1.035); box-shadow: 0 62px 110px rgba(30,40,80,.28), 0 10px 24px rgba(30,40,80,.1), inset 0 1px 1px rgba(255,255,255,1); }
+    /* bold diagonal colour wash */
+    .ecard::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(120deg, var(--c) -10%, transparent 74%); opacity: .42; }
+    /* folded colour corner */
+    .ecard::after { content: ""; position: absolute; top: 0; left: 0; z-index: 1; width: 0; height: 0; border-top: 30px solid var(--c); border-right: 30px solid transparent; opacity: .95; }
+    /* glassy light-sweep on hover */
+    .ecard .shine { position: absolute; inset: 0; z-index: 3; overflow: hidden; border-radius: inherit; pointer-events: none; }
+    .ecard .shine::before { content: ""; position: absolute; top: -60%; left: -40%; width: 36%; height: 220%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.65), transparent); transform: translateX(-220%) rotate(9deg); }
+    .ecard:hover .shine::before { transition: transform .85s cubic-bezier(.3,.6,.2,1); transform: translateX(560%) rotate(9deg); }
+
+    .ecard .eico { position: relative; z-index: 2; flex: 0 0 auto; width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center;
+      color: var(--c); background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.85); box-shadow: inset 0 1px 1px rgba(255,255,255,.95), 0 6px 16px rgba(30,40,80,.08); backdrop-filter: blur(6px); }
+    .ecard .eico svg { width: 25px; height: 25px; }
+    .ecard .ebody { position: relative; z-index: 2; flex: 1 1 auto; min-width: 0; }
+    .ecard .enum { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; font-weight: 700; letter-spacing: .18em; color: var(--c); text-transform: uppercase; }
+    .ecard .soon { display: inline-block; margin-left: 9px; font-family: "Inter", sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px; color: #7c8290; background: rgba(255,255,255,.7); text-transform: uppercase; vertical-align: middle; }
+    .ecard.is-soon { opacity: .85; }
+    .ecard h3 { font-family: "Playfair Display", Georgia, serif; font-weight: 600; font-size: 28px; color: var(--text); margin: 6px 0 3px; letter-spacing: -0.01em; }
+    .ecard .role { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+    .ecard p { margin-top: 11px; color: #51596b; font-size: 14.5px; line-height: 1.55; max-width: 380px; }
+    .ecard .meet { display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; padding: 12px 20px; border-radius: 12px;
+      background: #14181f; color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+      box-shadow: 0 8px 20px rgba(20,24,31,.22); transition: background .2s, transform .2s, box-shadow .2s; }
+    .ecard .meet:hover { background: #000; transform: translateX(3px); box-shadow: 0 10px 26px rgba(20,24,31,.3); }
+    .ecard .meet svg { width: 14px; height: 14px; }
+    .ecard .meet.soon-btn { background: rgba(255,255,255,.7); color: #7c8290; box-shadow: none; cursor: default; pointer-events: none; }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .emp-cards .ecard:nth-child(1) { transition-delay: .04s; }
+    .emp-cards .ecard:nth-child(2) { transition-delay: .11s; }
+    .emp-cards .ecard:nth-child(3) { transition-delay: .18s; }
+    .emp-cards .ecard:nth-child(4) { transition-delay: .25s; }
+
+    /* staggered 3D pop-out as the cards scroll into view */
+    .ecard.reveal.in { animation: ecardPop .8s cubic-bezier(.34,1.56,.64,1) backwards; }
+    .emp-cards .ecard:nth-child(1).in { animation-delay: 0s; }
+    .emp-cards .ecard:nth-child(2).in { animation-delay: .15s; }
+    .emp-cards .ecard:nth-child(3).in { animation-delay: .30s; }
+    .emp-cards .ecard:nth-child(4).in { animation-delay: .45s; }
+    @keyframes ecardPop {
+      0%   { opacity: 0; transform: translateZ(0) scale(.82); }
+      55%  { opacity: 1; transform: translateZ(45px) scale(1.05); }
+      100% { opacity: 1; transform: translateZ(0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ecard.reveal.in { animation: none; }
+    }
+
+    /* ====== Dashboard demo ====== */
+    .demo { position: relative; background: linear-gradient(180deg, #ffffff 0%, #f4f6fa 40%, #eef1f7 100%); padding: 90px 5vw 130px; }
+    .demo-wrap { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: minmax(280px, 0.78fr) 1.9fr; gap: 64px; align-items: center; }
+
+    /* left copy */
+    .demo-copy { max-width: 460px; }
+    .demo-kicker { display: inline-flex; align-items: center; gap: 13px; font-size: 13px; font-weight: 800; letter-spacing: .34em; text-transform: uppercase; color: var(--muted); margin-bottom: 26px; }
+    .demo-kicker::before { content: ""; width: 30px; height: 2px; border-radius: 2px; background: var(--text); }
+    .demo-copy h2 { font-size: clamp(38px, 4.2vw, 60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; color: var(--text); }
+    .demo-copy h2 .serif { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.01em;
+      background: linear-gradient(110deg, var(--teal), var(--teal-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .demo-copy p { margin-top: 24px; font-size: 17px; line-height: 1.65; color: #4a5468; max-width: 400px; }
+    .watch-btn { margin-top: 34px; display: inline-flex; align-items: center; gap: 13px; padding: 15px 26px 15px 16px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--text); font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 30px rgba(30,40,80,.08); transition: transform .2s, box-shadow .2s; }
+    .watch-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(30,40,80,.13); }
+    .watch-btn .play { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--teal), var(--teal-2)); color: #fff; }
+    .watch-btn .play svg { width: 14px; height: 14px; margin-left: 2px; }
+
+    /* dashboard panel */
+    .dash { display: grid; grid-template-columns: 84px 1fr; background: linear-gradient(160deg, #ffffff, #fbfcfe); border: 1px solid rgba(20,30,60,.07); border-radius: 26px; overflow: hidden;
+      box-shadow: 0 40px 90px -30px rgba(30,45,90,.30), 0 8px 24px rgba(30,45,90,.06); }
+
+    .dash-side { display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 24px 0; border-right: 1px solid rgba(20,30,60,.06); background: rgba(248,250,253,.6); }
+    .dash-logo { display: flex; align-items: center; }
+    .dash-logo svg { width: 30px; height: 30px; }
+    .dash-logo span { display: none; }
+    .dash-nav { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; flex: 1; }
+    .dash-nav a { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: #9aa4b6; cursor: pointer; transition: background .2s, color .2s; }
+    .dash-nav a svg { width: 20px; height: 20px; }
+    .dash-nav a:hover { color: #5a6478; background: rgba(20,30,60,.04); }
+    .dash-nav a.active { color: var(--teal); background: color-mix(in srgb, var(--teal) 13%, white); }
+    .dash-nav a.bottom { margin-top: auto; }
+
+    .dash-main { padding: 28px 30px 30px; min-width: 0; }
+    .dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+    .dash-head h3 { font-size: 25px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+    .dash-head p { margin-top: 4px; font-size: 14px; color: var(--muted); }
+    .dash-head-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .pill-live { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #3c4660; padding: 8px 15px; border-radius: 999px; border: 1px solid var(--line); background: #fff; }
+    .pill-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 0 rgba(15,179,158,.5); animation: livePulse 2s infinite; }
+    @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(15,179,158,.5); } 70% { box-shadow: 0 0 0 7px rgba(15,179,158,0); } 100% { box-shadow: 0 0 0 0 rgba(15,179,158,0); } }
+    .pill-week { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: #3c4660; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; }
+    .pill-week svg { width: 14px; height: 14px; color: var(--muted); }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 26px; }
+    .stat { position: relative; border-radius: 18px; padding: 16px 16px 0; overflow: hidden; background: linear-gradient(160deg, color-mix(in srgb, var(--c) 7%, white), #ffffff 70%); border: 1px solid color-mix(in srgb, var(--c) 14%, transparent); min-width: 0; }
+    .stat-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .stat-label { font-size: 12.5px; font-weight: 600; color: #5a6478; line-height: 1.3; }
+    .stat-up { display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0; font-size: 11px; font-weight: 800; color: #16a34a; background: rgba(22,163,74,.1); padding: 3px 7px; border-radius: 999px; }
+    .stat-up svg { width: 11px; height: 11px; }
+    .stat-num { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin: 8px 0 6px; font-variant-numeric: tabular-nums; }
+    .spark { display: block; width: 100%; height: 46px; }
+    .spark-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1); }
+    .spark-area { opacity: 0; transition: opacity 1.2s ease .3s; }
+    .dash.play .spark-line { stroke-dashoffset: 0; }
+    .dash.play .spark-area { opacity: 1; }
+
+    .dash-cols { display: grid; grid-template-columns: 1.25fr 1fr; gap: 26px; }
+    .dash-cols h4 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin-bottom: 14px; }
+    .activity ul, .emps ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .activity li { display: flex; align-items: center; gap: 12px; padding: 11px 8px; border-radius: 12px; transition: background .2s; }
+    .activity li:hover { background: rgba(20,30,60,.03); }
+    .aico { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: color-mix(in srgb, var(--c) 13%, white); color: var(--c); }
+    .aico svg { width: 17px; height: 17px; }
+    .atext { flex: 1 1 auto; min-width: 0; font-size: 13.5px; color: #3c4660; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .atag { flex: 0 0 auto; font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; color: var(--c); background: color-mix(in srgb, var(--c) 12%, white); }
+    .atime { flex: 0 0 auto; font-size: 12px; color: #9aa4b6; font-variant-numeric: tabular-nums; min-width: 48px; text-align: right; }
+    .view-all { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; padding-left: 8px; font-size: 13px; font-weight: 700; color: var(--teal); text-decoration: none; }
+    .view-all svg { width: 14px; height: 14px; }
+
+    .emps li { display: flex; align-items: center; gap: 12px; padding: 11px 8px; }
+    .emps .ebody { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .emps .ebody b { font-size: 14px; font-weight: 600; color: var(--text); }
+    .emps .ebody i { font-style: normal; font-size: 12px; color: #16a34a; font-weight: 600; }
+    .toggle { flex: 0 0 auto; width: 40px; height: 23px; border-radius: 999px; background: #d7dbe3; position: relative; transition: background .25s; }
+    .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 17px; height: 17px; border-radius: 50%; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.2); transition: transform .25s; }
+    .toggle.on { background: var(--c); }
+    .toggle.on::after { transform: translateX(17px); }
+
+    @media (max-width: 980px) {
+      .demo-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .demo-copy { max-width: none; text-align: center; }
+      .demo-copy p { margin-left: auto; margin-right: auto; }
+      .demo-kicker { justify-content: center; }
+    }
+
+    @media (max-width: 760px) {
+      nav { padding: 14px 20px; }
+      .stage { height: auto; }
+      .stage-pin { position: static; height: auto; padding: 86px 0 30px; overflow: visible; }
+      .stage-grid { display: block; padding-right: 0; }
+      .stage-text { position: static; width: auto; }
+      .text-layer { position: static; opacity: 1 !important; transform: none !important; padding: 0 22px; }
+      .emp-layer { margin-top: 46px; }
+      .stage-hex { margin-top: 10px; }
+      .stage-hex video { height: 46vh; max-width: 92vw; }
+      .scroll-hint { display: none; }
+      .employees { margin-top: 0; padding: 30px 22px 90px; }
+      .emp-cards { grid-template-columns: 1fr; }
+      .ecard { gap: 16px; padding: 22px; }
+      .ecard p { max-width: none; }
+
+      .demo { padding: 60px 20px 90px; }
+      .dash { grid-template-columns: 1fr; border-radius: 20px; }
+      .dash-side { flex-direction: row; justify-content: space-between; gap: 4px; padding: 14px 16px; border-right: none; border-bottom: 1px solid rgba(20,30,60,.06); }
+      .dash-nav { flex-direction: row; flex: 0 1 auto; gap: 2px; }
+      .dash-nav a.bottom { margin-top: 0; }
+      .dash-nav a { width: 36px; height: 36px; }
+      .dash-main { padding: 20px 16px 22px; }
+      .dash-head h3 { font-size: 21px; }
+      .dash-head-right { flex-direction: column; align-items: flex-end; gap: 7px; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .dash-cols { grid-template-columns: 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="brand">
+      <svg viewBox="0 0 100 100" aria-label="Fylo">
+        <defs>
+          <linearGradient id="hexg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#22c4ab" />
+            <stop offset="1" stop-color="#0a7d71" />
+          </linearGradient>
+        </defs>
+        <path fill="url(#hexg)" fill-rule="evenodd" stroke="url(#hexg)" stroke-width="4" stroke-linejoin="round"
+          d="M50 4 L89.8 27 L89.8 73 L50 96 L10.2 73 L10.2 27 Z M50 33 L65.6 42 L65.6 58 L50 67 L34.4 58 L34.4 42 Z" />
+      </svg>
+      <span class="wordmark">fylo<span class="dot">.</span></span>
+    </div>
+  </nav>
+
+  <!-- Pinned stage: words cross-fade beside the spinning hexagon -->
+  <div class="stage" id="stage">
+    <div class="stage-pin">
+      <div class="stage-grid">
+        <div class="stage-text">
+          <div class="text-layer hero-layer" id="heroLayer">
+            <span class="kicker">Fylo</span>
+            <h1><span class="grad">AI employees</span> for modern trade businesses.</h1>
+            <p>Hire AI employees that work 24/7 to handle admin, follow up leads, streamline operations, and help your business grow.</p>
+          </div>
+          <div class="text-layer emp-layer" id="empLayer">
+            <span class="emp-kicker">Fylo</span>
+            <h2>Meet your<span class="serif">AI Employees.</span></h2>
+            <p class="emp-sub">Each AI employee handles a part of your business so you can focus on the work that matters.</p>
+          </div>
+        </div>
+        <div class="stage-hex" id="stageHex">
+          <video id="scrubVideo" src="assets/hexpoo-teal5.mp4" muted playsinline preload="auto"></video>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint" id="scrollHint"><span>Scroll</span><span>↓</span></div>
+  </div>
+
+  <!-- Cards directly under the heading -->
+  <section class="employees">
+    <div class="emp-grid">
+      <div class="emp-cards">
+        <div class="ecard reveal" style="--c:#8b5cf6">
+          <span class="shine"></span>
+          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="ebody">
+            <div class="enum">01. Reviews</div>
+            <h3>Reviews.</h3>
+            <div class="role">Review Employee</div>
+            <p>Asks every customer for a Google review the moment they pay.</p>
+            <a class="meet" href="#">Meet Reviews <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="ecard reveal" style="--c:#3b82f6">
+          <span class="shine"></span>
+          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
+          <div class="ebody">
+            <div class="enum">02. Voice</div>
+            <h3>Voice.</h3>
+            <div class="role">Voice Employee</div>
+            <p>Answers every call you can't, books the jobs in, and sends you the transcript.</p>
+            <a class="meet" href="#">Meet Voice <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="ecard reveal" style="--c:#f59e0b">
+          <span class="shine"></span>
+          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>
+          <div class="ebody">
+            <div class="enum">03. Bills</div>
+            <h3>Bills.</h3>
+            <div class="role">Bills Employee</div>
+            <p>Files every supplier invoice into Xero before you've opened the email.</p>
+            <a class="meet" href="#">Meet Bills <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <div class="ecard reveal is-soon" style="--c:#10b981">
+          <span class="shine"></span>
+          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="ebody">
+            <div class="enum">04. Leads <span class="soon">Coming soon</span></div>
+            <h3>Leads.</h3>
+            <div class="role">Lead Employee</div>
+            <p>Responds to every website enquiry within seconds and follows up until they reply.</p>
+            <span class="meet soon-btn">Coming soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Dashboard demo ====== -->
+  <section class="demo">
+    <!-- shared sparkline gradients -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <linearGradient id="spk-rev" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".30"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></linearGradient>
+        <linearGradient id="spk-voice" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6" stop-opacity=".30"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>
+        <linearGradient id="spk-bills" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f59e0b" stop-opacity=".30"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></linearGradient>
+        <linearGradient id="spk-leads" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10b981" stop-opacity=".30"/><stop offset="1" stop-color="#10b981" stop-opacity="0"/></linearGradient>
+      </defs>
+    </svg>
+
+    <div class="demo-wrap">
+      <!-- left: copy -->
+      <div class="demo-copy reveal">
+        <span class="demo-kicker">Fylo</span>
+        <h2>Your AI<br/>workforce.<br/><span class="serif">Always working.</span></h2>
+        <p>Fylo AI employees handle the admin, follow-up, and operations &mdash; so you can focus on the work that actually matters.</p>
+        <button class="watch-btn" type="button">
+          <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+          Watch Demo
+        </button>
+      </div>
+
+      <!-- right: dashboard panel -->
+      <div class="dash reveal" id="dash">
+        <aside class="dash-side">
+          <div class="dash-logo">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <path fill="url(#hexg)" fill-rule="evenodd" stroke="url(#hexg)" stroke-width="4" stroke-linejoin="round"
+                d="M50 4 L89.8 27 L89.8 73 L50 96 L10.2 73 L10.2 27 Z M50 33 L65.6 42 L65.6 58 L50 67 L34.4 58 L34.4 42 Z" />
+            </svg>
+            <span>fylo<span class="dot">.</span></span>
+          </div>
+          <div class="dash-nav">
+            <a class="active" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></a>
+            <a aria-label="Team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></a>
+            <a aria-label="Messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></a>
+            <a aria-label="Documents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+            <a aria-label="Calls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+            <a aria-label="Reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></a>
+            <a class="bottom" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></a>
+          </div>
+        </aside>
+
+        <main class="dash-main">
+          <header class="dash-head">
+            <div>
+              <h3>Dashboard</h3>
+              <p>Your AI employees at work</p>
+            </div>
+            <div class="dash-head-right">
+              <span class="pill-live"><i></i>Live</span>
+              <span class="pill-week">This Week
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </div>
+          </header>
+
+          <div class="stat-grid">
+            <div class="stat" style="--c:#8b5cf6">
+              <div class="stat-top"><span class="stat-label">Reviews Generated</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>32%</span></div>
+              <div class="stat-num" data-target="47">0</div>
+              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
+                <path class="spark-area" fill="url(#spk-rev)" d="M0,48 C24,44 36,52 60,40 S96,46 120,30 156,34 180,20 210,16 220,10 L220,64 L0,64 Z"/>
+                <path class="spark-line" fill="none" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,48 C24,44 36,52 60,40 S96,46 120,30 156,34 180,20 210,16 220,10"/>
+              </svg>
+            </div>
+            <div class="stat" style="--c:#3b82f6">
+              <div class="stat-top"><span class="stat-label">Calls Answered</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>41%</span></div>
+              <div class="stat-num" data-target="63">0</div>
+              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
+                <path class="spark-area" fill="url(#spk-voice)" d="M0,40 C28,46 40,30 64,34 S96,22 120,32 150,42 176,26 206,18 220,24 L220,64 L0,64 Z"/>
+                <path class="spark-line" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,40 C28,46 40,30 64,34 S96,22 120,32 150,42 176,26 206,18 220,24"/>
+              </svg>
+            </div>
+            <div class="stat" style="--c:#f59e0b">
+              <div class="stat-top"><span class="stat-label">Invoices Processed</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>28%</span></div>
+              <div class="stat-num" data-target="112">0</div>
+              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
+                <path class="spark-area" fill="url(#spk-bills)" d="M0,50 C24,48 36,44 60,46 S94,30 120,36 152,40 178,22 208,28 220,14 L220,64 L0,64 Z"/>
+                <path class="spark-line" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,50 C24,48 36,44 60,46 S94,30 120,36 152,40 178,22 208,28 220,14"/>
+              </svg>
+            </div>
+            <div class="stat" style="--c:#10b981">
+              <div class="stat-top"><span class="stat-label">Leads Followed Up</span><span class="stat-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>36%</span></div>
+              <div class="stat-num" data-target="28">0</div>
+              <svg class="spark" viewBox="0 0 220 64" preserveAspectRatio="none">
+                <path class="spark-area" fill="url(#spk-leads)" d="M0,46 C24,42 38,48 60,38 S92,40 118,28 150,32 178,30 206,16 220,20 L220,64 L0,64 Z"/>
+                <path class="spark-line" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" d="M0,46 C24,42 38,48 60,38 S92,40 118,28 150,32 178,30 206,16 220,20"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="dash-cols">
+            <div class="activity">
+              <h4>Recent Activity</h4>
+              <ul>
+                <li><span class="aico" style="--c:#8b5cf6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="atext">Review request sent to Sarah M.</span><span class="atag" style="--c:#8b5cf6">Reviews</span><span class="atime">9:02am</span></li>
+                <li><span class="aico" style="--c:#3b82f6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span><span class="atext">Missed call from 03 123 4567 answered</span><span class="atag" style="--c:#3b82f6">Voice</span><span class="atime">9:06am</span></li>
+                <li><span class="aico" style="--c:#f59e0b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="atext">Supplier invoice from Bunnings filed to Xero</span><span class="atag" style="--c:#f59e0b">Bills</span><span class="atime">9:18am</span></li>
+                <li><span class="aico" style="--c:#10b981"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="atext">New lead from website replied</span><span class="atag" style="--c:#10b981">Leads</span><span class="atime">9:31am</span></li>
+                <li><span class="aico" style="--c:#8b5cf6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="atext">5 star review received from Tom R.</span><span class="atag" style="--c:#8b5cf6">Reviews</span><span class="atime">9:44am</span></li>
+              </ul>
+              <a class="view-all" href="#">View all activity
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+
+            <div class="emps">
+              <h4>Your Employees</h4>
+              <ul>
+                <li><span class="aico" style="--c:#8b5cf6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="ebody"><b>Reviews Employee</b><i>Active</i></span><span class="toggle on" style="--c:#8b5cf6"></span></li>
+                <li><span class="aico" style="--c:#3b82f6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span><span class="ebody"><b>Voice Employee</b><i>Active</i></span><span class="toggle on" style="--c:#3b82f6"></span></li>
+                <li><span class="aico" style="--c:#f59e0b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="ebody"><b>Bills Employee</b><i>Active</i></span><span class="toggle on" style="--c:#f59e0b"></span></li>
+                <li><span class="aico" style="--c:#10b981"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="ebody"><b>Leads Employee</b><i>Active</i></span><span class="toggle on" style="--c:#10b981"></span></li>
+              </ul>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const video = document.getElementById('scrubVideo');
+    const stage = document.getElementById('stage');
+    const heroLayer = document.getElementById('heroLayer');
+    const empLayer = document.getElementById('empLayer');
+    const scrollHint = document.getElementById('scrollHint');
+
+    let videoReady = false;
+    let targetTime = 0;
+    let currentTime = 0;
+    const clamp = (v) => Math.min(Math.max(v, 0), 1);
+
+    video.addEventListener('loadedmetadata', () => { videoReady = true; });
+    video.play().then(() => video.pause()).catch(() => {});
+
+    function onScroll() {
+      const rect = stage.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      const scrollable = stage.offsetHeight - vh;
+      const progress = clamp(scrolled / scrollable);
+
+      // spin at a fixed gentle rate (~one rotation per 1.8 screens of scroll)
+      if (videoReady && video.duration) {
+        targetTime = Math.min(scrolled / (1.8 * vh), 1) * video.duration;
+      }
+
+      // cross-fade the words in place — overlapping windows so one fades in
+      // as the other fades out (no empty gap), centered around progress ~0.4
+      const heroFade = clamp(1 - (progress - 0.18) / 0.32);   // hold, then fade 0.18 → 0.50
+      const empFade = clamp((progress - 0.48) / 0.34);        // fade in 0.48 → 0.82
+      const ease = (t) => t * t * (3 - 2 * t);                // smoothstep
+      const hF = ease(heroFade);
+      const eF = ease(empFade);
+      heroLayer.style.opacity = hF;
+      heroLayer.style.transform = `translateY(${(1 - hF) * -16}px)`;
+      empLayer.style.opacity = eF;
+      empLayer.style.transform = `translateY(${(1 - eF) * 16}px)`;
+      if (scrollHint) scrollHint.style.opacity = hF;
+    }
+
+    function tick() {
+      currentTime += (targetTime - currentTime) * 0.12;
+      if (videoReady && Math.abs(targetTime - currentTime) > 0.001) {
+        try { video.currentTime = currentTime; } catch (e) {}
+      }
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+    requestAnimationFrame(tick);
+
+    // cards fade in as they enter, just under the heading
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // dashboard: draw sparklines + count numbers up when it enters view
+    const dash = document.getElementById('dash');
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    function countUp(el) {
+      const target = parseInt(el.dataset.target, 10) || 0;
+      const dur = 1400, start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        el.textContent = Math.round(easeOut(p) * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    if (dash) {
+      const dashIO = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          dash.classList.add('play');
+          dash.querySelectorAll('.stat-num').forEach(countUp);
+          dashIO.unobserve(e.target);
+        });
+      }, { threshold: 0.3 });
+      dashIO.observe(dash);
+    }
+  </script>
+</body>
+</html>

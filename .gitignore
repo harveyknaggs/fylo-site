@@ -1,0 +1,14 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Node
+node_modules/
+
+# Local-only backup
+index.backup.html
+
+# Experiment videos — keep only the one the site actually uses
+assets/*.mp4
+!assets/hexpoo-teal5.mp4
