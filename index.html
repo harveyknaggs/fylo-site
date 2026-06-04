@@ -496,7 +496,7 @@
           </div>
         </div>
         <div class="stage-hex" id="stageHex">
-          <video id="scrubVideo" src="assets/hexpoo-teal5.mp4" muted playsinline autoplay loop preload="auto"></video>
+          <video id="scrubVideo" src="assets/hexpoo-teal5.mp4" muted playsinline preload="auto"></video>
         </div>
       </div>
     </div>
@@ -803,10 +803,16 @@
     const empLayer = document.getElementById('empLayer');
     const scrollHint = document.getElementById('scrollHint');
 
+    let videoReady = false;
+    let targetTime = 0;
+    let currentTime = 0;
     const clamp = (v) => Math.min(Math.max(v, 0), 1);
-    // Hexagon plays on its own (autoplay loop on the <video>). Scroll only
-    // drives the text cross-fade now — we no longer scrub video.currentTime.
-    video.play().catch(() => {});
+
+    // Warm up the video so currentTime seeks work (some browsers require
+    // a play() before allowing seeks). Then immediately pause — scroll
+    // drives video.currentTime from here, not autoplay.
+    video.addEventListener('loadedmetadata', () => { videoReady = true; });
+    video.play().then(() => video.pause()).catch(() => {});
 
     function onScroll() {
       const rect = stage.getBoundingClientRect();
@@ -814,6 +820,11 @@
       const scrolled = Math.max(0, -rect.top);
       const scrollable = stage.offsetHeight - vh;
       const progress = clamp(scrolled / scrollable);
+
+      // Hexagon spin tied to scroll position — ~one rotation per 1.8 screens
+      if (videoReady && video.duration) {
+        targetTime = Math.min(scrolled / (1.8 * vh), 1) * video.duration;
+      }
 
       // cross-fade the words in place — overlapping windows so one fades in
       // as the other fades out (no empty gap), centered around progress ~0.4
@@ -829,9 +840,20 @@
       if (scrollHint) scrollHint.style.opacity = hF;
     }
 
+    function tick() {
+      // Ease currentTime toward targetTime so the spin feels smooth even
+      // when scroll fires sparsely. Stops when targetTime stops moving.
+      currentTime += (targetTime - currentTime) * 0.12;
+      if (videoReady && Math.abs(targetTime - currentTime) > 0.001) {
+        try { video.currentTime = currentTime; } catch (e) {}
+      }
+      requestAnimationFrame(tick);
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     onScroll();
+    requestAnimationFrame(tick);
 
     // cards fade in as they enter, just under the heading
     const io = new IntersectionObserver((entries) => {
