@@ -7,7 +7,11 @@
   <link rel="icon" href="assets/hexagon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@1,500;1,600;1,700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/stellar-card.css" />
+  <link rel="stylesheet" href="assets/bills-card.css" />
+  <link rel="stylesheet" href="assets/voice-card.css" />
+  <link rel="stylesheet" href="assets/fuel-card.css" />
   <style>
     :root {
       --bg: #ffffff;
@@ -64,14 +68,14 @@
 
     .hero-layer h1 { font-size: clamp(34px, 4.8vw, 62px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: var(--text); }
     .hero-layer h1 .grad {
-      font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.005em; padding-right: .06em;
+      font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.005em; padding-right: .06em;
       background: linear-gradient(110deg, var(--teal), var(--teal-2)); -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .hero-layer p { margin-top: 22px; font-size: clamp(16px, 1.5vw, 20px); color: #3c4660; max-width: 480px; font-weight: 450; line-height: 1.6; }
 
     .emp-layer h2 { font-size: clamp(40px, 5vw, 70px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.0; color: var(--text); }
     .emp-layer h2 .serif {
-      display: block; font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.01em; padding-right: .06em;
+      display: block; font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; padding-right: .06em;
       background: linear-gradient(110deg, var(--teal), var(--teal-2)); -webkit-background-clip: text; background-clip: text; color: transparent;
     }
     .emp-layer .emp-sub { margin-top: 22px; color: #3c4660; font-size: 18px; line-height: 1.6; max-width: 430px; }
@@ -90,8 +94,16 @@
 
     /* ====== Cards: directly under the heading ====== */
     .employees { position: relative; z-index: 2; background: #ffffff; margin-top: 0; padding: 20px 6vw 140px; }
-    .emp-grid { max-width: 1280px; margin: 0 auto; }
-    .emp-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 44px; align-items: stretch; perspective: 1200px; }
+    .emp-grid { max-width: 1480px; margin: 0 auto; }
+    .emp-head { max-width: 720px; margin: 0 auto 56px; text-align: center; padding: 0 20px; }
+    .emp-eyebrow { display: inline-flex; align-items: center; gap: 13px; font-size: 12px; font-weight: 800; letter-spacing: 0.32em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+    .emp-eyebrow::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--teal), var(--teal-2)); }
+    .emp-title { font-size: clamp(34px, 3.4vw, 50px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--text); margin-bottom: 18px; }
+    .emp-title .emp-serif { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; background: linear-gradient(110deg, var(--teal), var(--teal-2)); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .04em; }
+    .emp-lead { font-size: 17px; line-height: 1.6; color: #4a5468; max-width: 580px; margin: 0 auto; }
+    .emp-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; align-items: stretch; perspective: 1200px; }
+    @media (max-width: 1200px) { .emp-cards { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+    @media (max-width: 760px) { .emp-head { margin-bottom: 40px; } .emp-lead { font-size: 15.5px; } }
     .ecard {
       position: relative; display: flex; align-items: center; gap: 26px;
       padding: 30px 34px; border-radius: 24px; overflow: hidden; isolation: isolate;
@@ -315,51 +327,243 @@
   <!-- Cards directly under the heading -->
   <section class="employees">
     <div class="emp-grid">
+      <header class="emp-head reveal">
+        <span class="emp-eyebrow">Your AI workforce</span>
+        <h2 class="emp-title">Meet the <span class="emp-serif">AI employees.</span></h2>
+        <p class="emp-lead">Each one quietly handles a part of your business. Bills, reviews, calls, fuel. So you can focus on the work that pays.</p>
+      </header>
       <div class="emp-cards">
-        <div class="ecard reveal" style="--c:#8b5cf6">
-          <span class="shine"></span>
-          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <div class="ebody">
-            <div class="enum">01. Reviews</div>
-            <h3>Reviews.</h3>
-            <div class="role">Review Employee</div>
-            <p>Asks every customer for a Google review the moment they pay.</p>
-            <a class="meet" href="#">Meet Reviews <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a class="stl-card reveal" href="showcase/reviews-about.html">
+          <div class="stl-stage">
+            <div class="stl-pulse"></div>
+            <div class="stl-stars">
+              <span class="stl-star" data-i="0"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.1L12 17.8 5.7 21.3l1.7-7.1L2 9.5l7.1-.6L12 2z"/></svg></span>
+              <span class="stl-star" data-i="1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.1L12 17.8 5.7 21.3l1.7-7.1L2 9.5l7.1-.6L12 2z"/></svg></span>
+              <span class="stl-star" data-i="2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.1L12 17.8 5.7 21.3l1.7-7.1L2 9.5l7.1-.6L12 2z"/></svg></span>
+              <span class="stl-star" data-i="3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.1L12 17.8 5.7 21.3l1.7-7.1L2 9.5l7.1-.6L12 2z"/></svg></span>
+              <span class="stl-star" data-i="4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.1L12 17.8 5.7 21.3l1.7-7.1L2 9.5l7.1-.6L12 2z"/></svg></span>
+              <span class="stl-sparkle"></span>
+              <span class="stl-sparkle"></span>
+              <span class="stl-sparkle"></span>
+              <span class="stl-sparkle"></span>
+              <span class="stl-sparkle"></span>
+            </div>
           </div>
-        </div>
-        <div class="ecard reveal" style="--c:#3b82f6">
-          <span class="shine"></span>
-          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
-          <div class="ebody">
-            <div class="enum">02. Voice</div>
-            <h3>Voice.</h3>
-            <div class="role">Voice Employee</div>
-            <p>Answers every call you can't, books the jobs in, and sends you the transcript.</p>
-            <a class="meet" href="#">Meet Voice <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <div class="stl-body">
+            <div class="stl-head">
+              <div>
+                <div class="stl-brand-name">Review Employee<em>.</em></div>
+                <div class="stl-gsubtitle">
+                  <svg class="stl-glogo" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22.5 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.9a5.04 5.04 0 01-2.19 3.31v2.75h3.54c2.07-1.91 3.25-4.72 3.25-8.07z" fill="#4285F4" />
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.54-2.75c-.98.66-2.23 1.05-3.74 1.05-2.87 0-5.3-1.94-6.17-4.54H2.18v2.85A11 11 0 0012 23z" fill="#34A853" />
+                    <path d="M5.83 14.1A6.6 6.6 0 015.5 12c0-.73.13-1.44.33-2.1V7.05H2.18A10.99 10.99 0 001 12c0 1.78.43 3.46 1.18 4.95l3.65-2.85z" fill="#FBBC05" />
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.05l3.65 2.85C6.7 7.32 9.13 5.38 12 5.38z" fill="#EA4335" />
+                  </svg>
+                  <span>
+                    <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+                  </span>
+                  <span class="stl-gsep" aria-hidden="true"></span>
+                  <span class="stl-grole">Reviews on autopilot</span>
+                  <span class="stl-gstars" aria-hidden="true">★★★★★</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="stl-desc">Sends the right review request to the right customer at the right moment. Happy ones land on Google; unhappy ones reach you privately, before they reach the internet.</p>
+
+            <div class="stl-powered">
+              <span class="stl-powered-label">Powered by</span>
+              <div class="stl-powered-logos">
+                <span class="stl-powered-logo" title="Xero">
+                  <svg width="16" height="16" viewBox="0 0 64 64" aria-hidden="true">
+                    <path fill="#00B2D5" d="M32 64c17.697 0 32-14.303 32-32S49.697 0 32 0 0 14.303 0 32s14.303 32 32 32z"/>
+                    <path fill="#ffffff" d="M15.304 31.9l5.454-5.454a1.03 1.03 0 0 0 .278-.668c0-.557-.445-1.002-1.002-1.002-.278 0-.5.1-.723.278l-5.454 5.454-5.454-5.454a1.03 1.03 0 0 0-.668-.278c-.557 0-1.002.445-1.002 1.002 0 .278.1.5.278.723l5.454 5.454L7 37.4c-.223.167-.278.445-.278.723 0 .557.445 1.002 1.002 1.002a.92.92 0 0 0 .668-.278l5.454-5.454 5.454 5.454a.92.92 0 0 0 .723.278c.557 0 1.002-.445 1.002-1.002a.92.92 0 0 0-.278-.668zm32.446 0c0 1.002.78 1.78 1.78 1.78s1.78-.78 1.78-1.78-.78-1.78-1.78-1.78c-.946 0-1.78.835-1.78 1.78zm-5.4 0a7.2 7.2 0 0 0 7.179 7.179 7.2 7.2 0 0 0 7.179-7.179 7.2 7.2 0 0 0-7.179-7.179A7.2 7.2 0 0 0 42.35 31.9zm2.06 0c0-2.838 2.282-5.176 5.176-5.176 2.838 0 5.176 2.282 5.176 5.176a5.13 5.13 0 0 1-5.176 5.176c-2.894 0-5.176-2.337-5.176-5.176zm-2.56-7.013h-.278c-.9 0-1.78.278-2.504.835-.1-.445-.5-.78-.946-.78-.557 0-.946.445-.946.946v12.077c0 .557.445 1.002 1.002 1.002s1.002-.445 1.002-1.002v-7.402c0-2.45.223-3.45 2.337-3.73h.4c.557 0 1.002-.4 1.002-.946-.056-.612-.5-1.002-1.057-1.002zm-6.733 5.666c-.445-2.003-1.503-3.617-3.172-4.675-2.45-1.558-5.677-1.447-8.014.223-1.892 1.336-3.005 3.617-3.005 5.9 0 .557.056 1.17.223 1.725.723 2.838 3.172 5 6.066 5.343a6.58 6.58 0 0 0 2.56-.167c.723-.167 1.503-.5 2.17-.9.723-.445 1.28-1.057 1.837-1.725l.056-.056c.4-.5.334-1.17-.1-1.503-.334-.278-.946-.4-1.447.223-.1.167-.223.278-.334.445-.4.445-.835.835-1.4 1.17-.723.4-1.558.612-2.393.612-2.838-.056-4.34-2.003-4.897-3.45-.1-.278-.167-.557-.223-.835v-.167h10.24c1.336-.056 2.06-1.057 1.837-2.17zm-12.02.167v-.1c.557-2.226 2.616-3.896 5-3.896 2.45 0 4.508 1.725 5.064 4.007z"/>
+                  </svg>
+                  Xero
+                </span>
+                <span class="stl-powered-logo" title="Google">
+                  <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">
+                    <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                    <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                    <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                    <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+                  </svg>
+                  Google
+                </span>
+                <span class="stl-powered-logo" title="Gmail">
+                  <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">
+                    <path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z"/>
+                    <path fill="#1e88e5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z"/>
+                    <polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"/>
+                    <path fill="#c62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0C4.924,8,3,9.924,3,12.298z"/>
+                    <path fill="#fbc02d" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0C43.076,8,45,9.924,45,12.298z"/>
+                  </svg>
+                  Gmail
+                </span>
+              </div>
+            </div>
+
+            <div class="stl-cta-row">
+              <span class="stl-btn-dark">
+                <span>View Review <em>Employee</em></span>
+                <span class="stl-cta-arrow">&rarr;</span>
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="ecard reveal" style="--c:#f59e0b">
-          <span class="shine"></span>
-          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>
-          <div class="ebody">
-            <div class="enum">03. Bills</div>
-            <h3>Bills.</h3>
-            <div class="role">Bills Employee</div>
-            <p>Files every supplier invoice into Xero before you've opened the email.</p>
-            <a class="meet" href="#">Meet Bills <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </a>
+        <a class="voice-card reveal" href="showcase/voice-about.html" aria-label="Voice Employee card">
+          <div class="vc-visual">
+            <div class="vc-wave" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
           </div>
-        </div>
-        <div class="ecard reveal is-soon" style="--c:#10b981">
-          <span class="shine"></span>
-          <div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <div class="ebody">
-            <div class="enum">04. Leads <span class="soon">Coming soon</span></div>
-            <h3>Leads.</h3>
-            <div class="role">Lead Employee</div>
-            <p>Responds to every website enquiry within seconds and follows up until they reply.</p>
-            <span class="meet soon-btn">Coming soon</span>
+
+          <div class="vc-body">
+            <div class="vc-head-row">
+              <h3>Voice Employee</h3>
+            </div>
+            <div class="vc-subtitle">
+              Answers, books, escalates. <span class="vc-italic">Your after-hours receptionist.</span>
+            </div>
+
+            <p class="vc-desc">
+              When you cannot pick up, Voice answers within 2 rings, speaks in your business tone,
+              captures what the caller needs, <span class="vc-italic">books them in</span> if it fits, and sends you the recap.
+            </p>
+
+            <div class="vc-cta-row">
+              <span class="vc-cta">
+                <span>View Voice <span class="vc-italic">Employee</span></span>
+                <span class="vc-cta-arrow">&rarr;</span>
+              </span>
+            </div>
           </div>
-        </div>
+        </a>
+        <a class="bills-card reveal" href="showcase/bills-about.html" id="billsCard">
+          <div class="bls-visual">
+            <span class="bls-spark s1"></span>
+            <span class="bls-spark s2"></span>
+            <span class="bls-spark s3"></span>
+
+            <div class="bls-invoice">
+              <div class="bls-paper">
+                <div class="bls-scan"></div>
+
+                <div class="bls-inv-content" id="blsInvContent">
+                  <div class="bls-inv-head">
+                    <div class="bls-inv-logo" id="blsInvLogo">MITRE 10</div>
+                    <div class="bls-inv-num" id="blsInvNum">INV-23874</div>
+                  </div>
+                  <div class="bls-inv-title">Tax invoice.</div>
+                  <div class="bls-inv-rule"></div>
+                  <div class="bls-inv-rule med"></div>
+                  <div class="bls-inv-rule short"></div>
+                  <div class="bls-inv-rule"></div>
+                  <div class="bls-inv-rule med"></div>
+                  <div class="bls-inv-total">
+                    <span class="lbl">Total</span>
+                    <span class="val" id="blsInvTotal">$842.50</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bls-coded-badge">
+                <span class="check">✓</span>
+                <span class="label">coded</span>
+                <span class="code" id="blsInvCode">5710</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bls-body">
+            <div class="bls-head-row">
+              <h3>Bills Employee</h3>
+              <span class="bls-live">LIVE</span>
+            </div>
+            <div class="bls-subtitle">
+              Reads, codes, queues. <span class="bls-italic">Your one-tap bills inbox.</span>
+            </div>
+
+            <p class="bls-desc">
+              Every supplier invoice that lands in your Gmail is read, coded against your last 90 days of Xero history, and queued for your approval. You stop coding bills at 9pm.
+            </p>
+
+            <div class="bls-integrations">
+              <span class="bls-integrations-lbl">Powered by</span>
+              <div class="bls-integrations-row">
+                <span class="bls-int-pill">
+                  <span class="bls-int" aria-hidden="true">
+                    <svg viewBox="0 0 64 64">
+                      <path fill="#00B2D5" d="M32 64c17.697 0 32-14.303 32-32S49.697 0 32 0 0 14.303 0 32s14.303 32 32 32z"/>
+                      <path fill="#ffffff" d="M15.304 31.9l5.454-5.454a1.03 1.03 0 0 0 .278-.668c0-.557-.445-1.002-1.002-1.002-.278 0-.5.1-.723.278l-5.454 5.454-5.454-5.454a1.03 1.03 0 0 0-.668-.278c-.557 0-1.002.445-1.002 1.002 0 .278.1.5.278.723l5.454 5.454L7 37.4c-.223.167-.278.445-.278.723 0 .557.445 1.002 1.002 1.002a.92.92 0 0 0 .668-.278l5.454-5.454 5.454 5.454a.92.92 0 0 0 .723.278c.557 0 1.002-.445 1.002-1.002a.92.92 0 0 0-.278-.668zm32.446 0c0 1.002.78 1.78 1.78 1.78s1.78-.78 1.78-1.78-.78-1.78-1.78-1.78c-.946 0-1.78.835-1.78 1.78zm-5.4 0a7.2 7.2 0 0 0 7.179 7.179 7.2 7.2 0 0 0 7.179-7.179 7.2 7.2 0 0 0-7.179-7.179A7.2 7.2 0 0 0 42.35 31.9zm2.06 0c0-2.838 2.282-5.176 5.176-5.176 2.838 0 5.176 2.282 5.176 5.176a5.13 5.13 0 0 1-5.176 5.176c-2.894 0-5.176-2.337-5.176-5.176zm-2.56-7.013h-.278c-.9 0-1.78.278-2.504.835-.1-.445-.5-.78-.946-.78-.557 0-.946.445-.946.946v12.077c0 .557.445 1.002 1.002 1.002s1.002-.445 1.002-1.002v-7.402c0-2.45.223-3.45 2.337-3.73h.4c.557 0 1.002-.4 1.002-.946-.056-.612-.5-1.002-1.057-1.002zm-6.733 5.666c-.445-2.003-1.503-3.617-3.172-4.675-2.45-1.558-5.677-1.447-8.014.223-1.892 1.336-3.005 3.617-3.005 5.9 0 .557.056 1.17.223 1.725.723 2.838 3.172 5 6.066 5.343a6.58 6.58 0 0 0 2.56-.167c.723-.167 1.503-.5 2.17-.9.723-.445 1.28-1.057 1.837-1.725l.056-.056c.4-.5.334-1.17-.1-1.503-.334-.278-.946-.4-1.447.223-.1.167-.223.278-.334.445-.4.445-.835.835-1.4 1.17-.723.4-1.558.612-2.393.612-2.838-.056-4.34-2.003-4.897-3.45-.1-.278-.167-.557-.223-.835v-.167h10.24c1.336-.056 2.06-1.057 1.837-2.17zm-12.02.167v-.1c.557-2.226 2.616-3.896 5-3.896 2.45 0 4.508 1.725 5.064 4.007z"/>
+                    </svg>
+                  </span>
+                  Xero
+                </span>
+                <span class="bls-int-pill">
+                  <span class="bls-int" aria-hidden="true">
+                    <svg viewBox="0 0 48 48">
+                      <path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z"/>
+                      <path fill="#1e88e5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z"/>
+                      <polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"/>
+                      <path fill="#c62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0C4.924,8,3,9.924,3,12.298z"/>
+                      <path fill="#fbc02d" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0C43.076,8,45,9.924,45,12.298z"/>
+                    </svg>
+                  </span>
+                  Gmail
+                </span>
+              </div>
+            </div>
+
+            <div class="bls-cta-row">
+              <span class="bls-cta">
+                <span>Open Bills <span class="bls-italic">Employee</span></span>
+                <span class="bls-cta-arrow">&rarr;</span>
+              </span>
+            </div>
+          </div>
+        </a>
+        <a class="fuel-employee-card reveal" href="showcase/fuel-about.html" aria-label="Fuel Employee card">
+          <div class="fuel-card-visual" aria-hidden="true">
+            <div class="fuel-card-shell">
+              <div class="fuel-card">
+                <div class="fuel-chip"></div>
+                <div class="fuel-number">**** 1234</div>
+                <div class="fuel-meta"><span>Ute Ben</span><span>BP</span></div>
+              </div>
+              <div class="fuel-card">
+                <div class="fuel-chip"></div>
+                <div class="fuel-number">**** 5678</div>
+                <div class="fuel-meta"><span>Tipper</span><span>BP</span></div>
+              </div>
+              <div class="fuel-card">
+                <div class="fuel-chip"></div>
+                <div class="fuel-number">**** 9982</div>
+                <div class="fuel-meta"><span>Trailer</span><span>Mobil</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fuel-card-body">
+            <div class="fuel-head-row">
+              <h2>Fuel Employee</h2>
+              <span class="fuel-live"><i></i> Live</span>
+            </div>
+
+            <p class="fuel-subtitle">Keeps every card current. <em>Even while the crew moves.</em></p>
+            <p class="fuel-desc">Tracks every fuel card and where the money goes. Each fill is matched to the right vehicle, sorted clean, and ready for Xero.</p>
+
+            <span class="fuel-cta">
+              <span>Open Fuel <em>Employee</em></span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6"></path>
+                </svg>
+              </span>
+            </span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -381,7 +585,7 @@
       <div class="demo-copy reveal">
         <span class="demo-kicker">Fylo</span>
         <h2>Your AI<br/>workforce.<br/><span class="serif">Always working.</span></h2>
-        <p>Fylo AI employees handle the admin, follow-up, and operations &mdash; so you can focus on the work that actually matters.</p>
+        <p>Fylo AI employees handle the admin, follow-up, and operations. So you can focus on the work that actually matters.</p>
         <button class="watch-btn" type="button">
           <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
           Watch Demo
@@ -547,6 +751,38 @@
       entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // Bills card: cycle the invoice content in sync with the 6s CSS scan
+    // (badge keyframes hide it during the swap, then pop the new code in).
+    (function billsCycle() {
+      const content = document.getElementById('blsInvContent');
+      if (!content) return;
+      const logo  = document.getElementById('blsInvLogo');
+      const num   = document.getElementById('blsInvNum');
+      const total = document.getElementById('blsInvTotal');
+      const code  = document.getElementById('blsInvCode');
+      const BILLS = [
+        { logo: 'MITRE 10',    num: 'INV-23874',   total: '$842.50',   code: '5710' },
+        { logo: 'BP CARD',     num: 'CARD-04488',  total: '$312.74',   code: '6320' },
+        { logo: 'NZ POST',     num: 'CTC-26-0414', total: '$48.20',    code: '6800' },
+        { logo: 'SPARK NZ',    num: 'SP-77821',    total: '$219.40',   code: '6620' },
+        { logo: 'PLACEMAKERS', num: 'INV-882041',  total: '$1,284.20', code: '5710' },
+        { logo: 'VODAFONE',    num: 'VF-3382912',  total: '$184.99',   code: '6310' },
+      ];
+      let i = 0;
+      setInterval(() => {
+        content.classList.add('swapping');
+        setTimeout(() => {
+          i = (i + 1) % BILLS.length;
+          const b = BILLS[i];
+          logo.textContent  = b.logo;
+          num.textContent   = b.num;
+          total.textContent = b.total;
+          code.textContent  = b.code;
+          content.classList.remove('swapping');
+        }, 320);
+      }, 6000);
+    })();
 
     // dashboard: draw sparklines + count numbers up when it enters view
     const dash = document.getElementById('dash');

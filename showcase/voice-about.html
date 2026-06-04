@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Voice Employee &middot; About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600;700&display=swap" />
+<style>
+/* voice-about.html — Voice Employee About page. Royal-blue accent + Fraunces
+   italic over Geist, with a back chip top-left and a single signup CTA. */
+
+:root {
+  --blue: #1f6dfd;
+  --blue-deep: #1453d8;
+  --blue-bright: #4f8bff;
+  --ink: #0d1526;
+  --ink-2: #4a5468;
+  --ink-3: #8a93a6;
+  --bg: #ffffff;
+  --tint: #f3f7ff;
+  --tint-2: #eaf1ff;
+  --line: #e6ebf4;
+  --line-2: #d7deec;
+  --green: #1f9d57;
+  --amber: #d99a26;
+  --red: #e0483f;
+  --radius: 18px;
+  --maxw: 1140px;
+  --shadow-card: 0 1px 0 rgba(13,21,38,.02), 0 0 0 1px var(--line), 0 26px 50px -34px rgba(13,21,38,.30);
+  --shadow-blue: 0 18px 40px -16px rgba(31,109,253,.45);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+.fr { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+.blue { color: var(--blue); }
+.shell { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+a { color: inherit; }
+
+/* ============================== BACK NAV ============================== */
+.v-topnav { padding: 22px 0 0; }
+.v-topnav .shell { display: flex; align-items: center; }
+.v-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ink-2); font-size: 13px; font-weight: 500; text-decoration: none;
+  padding: 6px 14px 6px 10px; border-radius: 999px;
+  border: 1px solid var(--line); background: rgba(255,255,255,.6);
+  transition: background .15s, color .15s, border-color .15s, transform .15s;
+}
+.v-back:hover { background: #fff; color: var(--ink); border-color: var(--line-2); transform: translateX(-2px); }
+.v-back svg { width: 16px; height: 16px; }
+
+/* ============================== HERO ============================== */
+.v-hero { position: relative; overflow: hidden; padding: 64px 0 104px; }
+.v-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(800px 420px at 78% 8%, var(--tint-2) 0%, transparent 62%),
+    radial-gradient(700px 500px at 6% 0%, #f6f8ff 0%, transparent 60%);
+}
+.v-hero .shell { display: grid; grid-template-columns: 1fr 0.92fr; gap: 64px; align-items: center; }
+@media (max-width: 940px) { .v-hero .shell { grid-template-columns: 1fr; gap: 48px; } }
+
+.v-h1 {
+  margin: 0 0 22px; font-size: 60px; line-height: 1.02; font-weight: 700;
+  letter-spacing: -0.035em; color: var(--ink); text-wrap: balance;
+}
+.v-h1 .fr { font-weight: 400; letter-spacing: -0.02em; }
+@media (max-width: 540px) { .v-h1 { font-size: 44px; } }
+
+.v-sub { margin: 0 0 34px; font-size: 17px; line-height: 1.62; color: var(--ink-2); max-width: 480px; }
+.v-sub .fr { color: var(--ink); }
+
+.v-actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.v-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--blue-bright), var(--blue-deep));
+  color: #fff; text-decoration: none; font-size: 15px; font-weight: 600;
+  padding: 14px 22px; border-radius: 999px; border: 0; cursor: pointer;
+  box-shadow: var(--shadow-blue);
+  transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s;
+}
+.v-cta:hover { transform: translateY(-2px); box-shadow: 0 22px 46px -16px rgba(31,109,253,.6); }
+.v-cta .arw { transition: transform .25s; }
+.v-cta:hover .arw { transform: translateX(3px); }
+
+.v-trust { margin-top: 30px; display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); }
+.v-trust span { display: inline-flex; align-items: center; gap: 7px; }
+.v-trust span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); opacity: .55; }
+
+/* ---- Live receptionist card ---- */
+.v-livewrap { position: relative; }
+.v-livewrap::after {
+  content: ''; position: absolute; inset: -8% -6% -10% -6%; z-index: -1; border-radius: 40px;
+  background: radial-gradient(closest-side, rgba(31,109,253,.16), transparent 72%);
+  filter: blur(6px);
+}
+.v-live {
+  background: #fff; border-radius: 22px; padding: 22px;
+  box-shadow: var(--shadow-card);
+  animation: v-float 7s ease-in-out infinite;
+}
+@keyframes v-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.v-live-head { display: flex; align-items: center; gap: 13px; margin-bottom: 16px; }
+.v-live-ico {
+  width: 46px; height: 46px; border-radius: 13px; flex: 0 0 auto; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(150deg, var(--blue-bright), var(--blue-deep)); box-shadow: var(--shadow-blue);
+}
+.v-live-ico svg { width: 22px; height: 22px; }
+.v-live-name { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.v-live-role { font-size: 12.5px; color: var(--ink-3); }
+.v-live-role b { color: var(--green); font-weight: 600; }
+
+.v-status {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--tint-2); color: var(--blue-deep); font-size: 13px; font-weight: 500;
+  padding: 11px 14px; border-radius: 11px; margin-bottom: 14px;
+}
+.v-status .d { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(31,157,87,.18); animation: v-pulse 1.8s infinite; }
+@keyframes v-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(79,139,255,.55); } 50% { box-shadow: 0 0 0 5px rgba(79,139,255,0); } }
+
+.v-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+.v-stat { background: var(--tint); border: 1px solid var(--line); border-radius: 13px; padding: 14px 15px; }
+.v-stat .n { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 30px; line-height: 1; color: var(--blue); letter-spacing: -0.02em; }
+.v-stat .l { font-size: 11.5px; color: var(--ink-3); margin-top: 7px; }
+
+.v-reclabel { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; margin-bottom: 10px; }
+.v-calls { display: flex; flex-direction: column; gap: 8px; }
+.v-call {
+  display: grid; grid-template-columns: 30px 1fr auto; gap: 11px; align-items: center;
+  padding: 11px 12px; border-radius: 12px; background: var(--tint);
+  border: 1px solid transparent;
+}
+.v-call.fresh { background: #fff; border-color: var(--line); box-shadow: 0 10px 22px -16px rgba(13,21,38,.28); }
+.v-call-ico { width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+.v-call-ico.ok { background: #e1f3e9; color: var(--green); }
+.v-call-ico.warm { background: #fbf0d6; color: var(--amber); }
+.v-call-ico.urgent { background: #fbe2e0; color: var(--red); }
+.v-call-name { display: block; font-size: 13.5px; font-weight: 600; }
+.v-call-desc { display: block; font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+.v-call-time { font-size: 11.5px; color: var(--ink-3); white-space: nowrap; align-self: start; }
+.v-live-foot { text-align: center; font-size: 11.5px; color: var(--ink-3); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.v-live-foot .fr { color: var(--ink-2); }
+
+/* ============================== SECTION FRAME ============================== */
+.v-sec { padding: 96px 0; }
+.v-sec.band-2 { background: var(--tint); }
+.v-kicker {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 16px;
+}
+.v-h2 { margin: 0 0 16px; font-size: 40px; line-height: 1.08; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); }
+.v-h2 .fr { font-weight: 400; }
+@media (max-width: 540px) { .v-h2 { font-size: 30px; } }
+.v-lead { margin: 0; font-size: 16.5px; line-height: 1.62; color: var(--ink-2); max-width: 560px; }
+.v-sec-head { margin-bottom: 52px; }
+
+/* ============================== SETUP GRID ============================== */
+.v-setup { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 760px) { .v-setup { grid-template-columns: 1fr; } }
+.v-scard {
+  display: flex; gap: 16px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 24px; transition: border-color .3s, box-shadow .3s, transform .3s;
+}
+.v-scard:hover { border-color: var(--line-2); box-shadow: var(--shadow-card); transform: translateY(-3px); }
+.v-snum {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 9px; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+  color: var(--blue); background: var(--tint-2);
+}
+.v-stitle { font-size: 15.5px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 7px; }
+.v-sdesc { font-size: 13.5px; line-height: 1.6; color: var(--ink-2); }
+.v-banner {
+  margin-top: 22px; text-align: center; padding: 20px;
+  background: linear-gradient(120deg, var(--tint-2), #eef4ff); border: 1px solid var(--line);
+  border-radius: 14px; font-size: 15px; font-weight: 500; color: var(--blue-deep);
+}
+.v-banner .fr { color: var(--ink-2); }
+
+/* ============================== POV + PHONE ============================== */
+.v-pov .shell { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+@media (max-width: 940px) { .v-pov .shell { grid-template-columns: 1fr; gap: 48px; } }
+.v-povlist { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.v-povlist li { display: flex; gap: 13px; align-items: baseline; font-size: 14px; color: var(--ink-2); }
+.v-povlist li::before { content: ''; flex: 0 0 auto; align-self: center; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+.v-povlist b { color: var(--ink); font-weight: 600; }
+.v-povhint { margin-top: 30px; font-size: 13px; color: var(--ink-3); }
+
+.v-phone-stage { display: flex; justify-content: center; position: relative; }
+.v-phone-stage::before { content: ''; position: absolute; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(closest-side, rgba(31,109,253,.14), transparent 70%); }
+.v-phone {
+  position: relative; width: 300px; height: 600px; background: #0d1526; border-radius: 44px; padding: 11px;
+  box-shadow: 0 50px 90px -40px rgba(13,21,38,.5), 0 0 0 1px rgba(13,21,38,.6);
+  animation: v-float 8s ease-in-out infinite;
+}
+.v-screen { position: relative; width: 100%; height: 100%; background: #f4f6fa; border-radius: 34px; overflow: hidden; display: flex; flex-direction: column; }
+.v-notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 116px; height: 26px; background: #0d1526; border-radius: 0 0 16px 16px; z-index: 5; }
+.v-statusbar { display: flex; justify-content: space-between; align-items: center; padding: 13px 22px 6px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.v-callbar { display: flex; align-items: center; gap: 8px; background: var(--green); color: #fff; font-size: 12.5px; font-weight: 600; padding: 8px 16px; }
+.v-callbar .dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; opacity: .9; }
+.v-callbar .t { margin-left: auto; font-variant-numeric: tabular-nums; opacity: .9; }
+.v-chat { flex: 1; overflow: hidden; padding: 16px 14px; display: flex; flex-direction: column; gap: 12px; position: relative; }
+.v-who { font-size: 10px; color: var(--ink-3); letter-spacing: .02em; margin: 2px 2px -4px; }
+.v-bubble { max-width: 78%; font-size: 12.5px; line-height: 1.4; padding: 10px 13px; border-radius: 16px; }
+.v-bubble.them { align-self: flex-start; background: #fff; color: var(--ink); border-bottom-left-radius: 5px; box-shadow: 0 2px 8px -4px rgba(13,21,38,.2); }
+.v-bubble.me { align-self: flex-end; background: linear-gradient(135deg, var(--blue-bright), var(--blue)); color: #fff; border-bottom-right-radius: 5px; }
+.v-bubble.me + .v-name { align-self: flex-end; }
+.v-name { font-size: 9.5px; color: var(--ink-3); margin: -7px 3px 0; }
+.v-chat-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: linear-gradient(transparent, #f4f6fa); pointer-events: none; }
+.v-summary { background: #fff; border-top: 1px solid var(--line); padding: 13px 16px 16px; }
+.v-summary .h { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; margin-bottom: 9px; }
+.v-summary .row { display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--ink); margin-bottom: 7px; }
+.v-summary .ck { width: 16px; height: 16px; border-radius: 50%; background: #e1f3e9; color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.v-replay { text-align: center; margin-top: 22px; font-size: 13px; color: var(--ink-3); }
+
+/* ============================== CLOSING CTA ============================== */
+.v-close { padding: 30px 0 96px; }
+.v-closecard {
+  position: relative; overflow: hidden; border-radius: 26px; padding: 64px 56px;
+  background:
+    radial-gradient(700px 320px at 88% 0%, rgba(79,139,255,.18), transparent 60%),
+    linear-gradient(160deg, #f4f8ff, #eaf1ff);
+  border: 1px solid var(--line);
+}
+@media (max-width: 600px) { .v-closecard { padding: 44px 28px; } }
+.v-closecard .v-h2 { margin-bottom: 18px; }
+.v-closecard .v-lead { margin-bottom: 32px; }
+.v-foot { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--ink-3); }
+.v-foot a { color: var(--blue); text-decoration: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- BACK NAV -->
+<div class="v-topnav">
+  <div class="shell">
+    <a class="v-back" href="/" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="v-hero">
+  <div class="shell">
+    <div>
+      <h1 class="v-h1">Meet <span class="fr blue">Voice.</span><br />Every call answered.</h1>
+      <p class="v-sub">When you can't pick up, Voice answers within two rings. Greets the caller in your business's tone, captures what they need, <span class="fr">books them in</span> if it's a job, and sends you a full transcript before the call ends.</p>
+      <div class="v-actions">
+        <a class="v-cta" href="https://fylo.co.nz/signup?next=/voice/connect">Connect Voice <span class="arw">&rarr;</span></a>
+      </div>
+      <div class="v-trust">
+        <span>Keeps your existing number</span>
+        <span>Live in three minutes</span>
+        <span>No app for callers</span>
+      </div>
+    </div>
+
+    <div class="v-livewrap">
+      <div class="v-live">
+        <div class="v-live-head">
+          <div class="v-live-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.6 4-2 1.4a12 12 0 005.6 5.6l1.4-2 4 1.6v3a2 2 0 01-2.2 2A16 16 0 013 6.2 2 2 0 015 4z"/></svg>
+          </div>
+          <div>
+            <div class="v-live-name">Voice</div>
+            <div class="v-live-role">AI Receptionist &middot; <b>active</b></div>
+          </div>
+        </div>
+
+        <div class="v-status"><span class="d"></span>Answering calls for Your Business</div>
+
+        <div class="v-stats">
+          <div class="v-stat"><div class="n">7</div><div class="l">calls handled today</div></div>
+          <div class="v-stat"><div class="n">4</div><div class="l">bookings made</div></div>
+        </div>
+
+        <div class="v-reclabel">Recent calls</div>
+        <div class="v-calls">
+          <div class="v-call fresh">
+            <span class="v-call-ico ok">&check;</span>
+            <span><span class="v-call-name">Mark T.</span><span class="v-call-desc">Booked. Lawn mow, Sat 9am</span></span>
+            <span class="v-call-time">4m ago</span>
+          </div>
+          <div class="v-call">
+            <span class="v-call-ico warm">&#8599;</span>
+            <span><span class="v-call-name">Unknown caller</span><span class="v-call-desc">Warm lead. Quote for hedges</span></span>
+            <span class="v-call-time">22m ago</span>
+          </div>
+          <div class="v-call">
+            <span class="v-call-ico urgent">!</span>
+            <span><span class="v-call-name">Sarah K.</span><span class="v-call-desc">Escalated. Gate damage, urgent</span></span>
+            <span class="v-call-time">1h ago</span>
+          </div>
+        </div>
+
+        <div class="v-live-foot">via <span class="fr">Fylo</span> &middot; Voice AI Employee</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUR STEPS / SETUP -->
+<section class="v-sec band-2">
+  <div class="shell">
+    <div class="v-sec-head">
+      <div class="v-kicker">What you'd do</div>
+      <h2 class="v-h2">Four steps, <span class="fr">then you're done.</span></h2>
+      <p class="v-lead">No phone system to replace. No scripts to write. One carrier setting and three minutes of setup is all it takes.</p>
+    </div>
+
+    <div class="v-setup">
+      <div class="v-scard">
+        <span class="v-snum">1</span>
+        <div><div class="v-stitle">Forward your number on busy or no-answer</div><p class="v-sdesc">One setting in your carrier's app or a single USSD code. Works on any mobile plan. Voice gives you the exact steps for your carrier.</p></div>
+      </div>
+      <div class="v-scard">
+        <span class="v-snum">2</span>
+        <div><div class="v-stitle">Record a 10-second voice sample or pick a preset</div><p class="v-sdesc">Voice learns your cadence from a short recording. Your greeting, your pace. Or choose a neutral professional preset and skip straight to setup.</p></div>
+      </div>
+      <div class="v-scard">
+        <span class="v-snum">3</span>
+        <div><div class="v-stitle">Set your business hours and services</div><p class="v-sdesc">Voice only books into the slots you make available. Add your service list so it knows what to offer and what to escalate to you directly.</p></div>
+      </div>
+      <div class="v-scard">
+        <span class="v-snum">4</span>
+        <div><div class="v-stitle">Set your escalation rule</div><p class="v-sdesc">Pick the keywords or call types that should wake you up: "urgent", "damage", "cancel". Voice texts you immediately when one comes in.</p></div>
+      </div>
+    </div>
+
+    <div class="v-banner">That's it. Voice handles every missed call from here. <span class="fr">No further input needed.</span></div>
+  </div>
+</section>
+
+<!-- CALLER POV -->
+<section class="v-sec v-pov">
+  <div class="shell">
+    <div>
+      <div class="v-kicker">Your customer's POV</div>
+      <h2 class="v-h2">What the caller <span class="fr">actually</span> hears</h2>
+      <p class="v-lead">The caller never knows they've reached an AI. They hear your business name, a <span class="fr">warm and professional</span> greeting, and a receptionist that knows exactly what to ask. No hold music, no voicemail box, no lost job.</p>
+      <ul class="v-povlist">
+        <li><span><b>Greeted by name.</b> "Thanks for calling Your Business&hellip;"</span></li>
+        <li><span><b>Asked the right questions.</b> Type of job, address, timing</span></li>
+        <li><span><b>Confirmed on the spot.</b> Booking date, time, and a callback promise</span></li>
+        <li><span><b>No waiting.</b> The whole exchange takes under 90 seconds</span></li>
+      </ul>
+      <p class="v-povhint">A real exchange, captured end to end &darr;</p>
+    </div>
+
+    <div class="v-phone-stage">
+      <div class="v-phone">
+        <div class="v-screen">
+          <div class="v-notch"></div>
+          <div class="v-statusbar"><span>9:41</span><span>5G &#9642;</span></div>
+          <div class="v-callbar"><span class="dot"></span>Your Business &middot; Voice<span class="t">0:31</span></div>
+          <div class="v-chat">
+            <div class="v-who">Voice receptionist</div>
+            <div class="v-bubble them">Thanks for calling Your Business. How can I help today?</div>
+            <div class="v-bubble me">Hi, I'd like to book a lawn mow for next Saturday if you have anything available.</div>
+            <div class="v-name">Mark</div>
+            <div class="v-bubble them">Happy to help with that. What's your address, and roughly what size section are we talking?</div>
+            <div class="v-bubble me">12 Fitzgerald Ave. It's a small section, maybe 200 square metres.</div>
+            <div class="v-name">Mark</div>
+            <div class="v-bubble them">Perfect. I've got you in for Saturday at 9am, and I'll text you a confirmation now.</div>
+            <div class="v-chat-fade"></div>
+          </div>
+          <div class="v-summary">
+            <div class="h">Call summary</div>
+            <div class="row"><span class="ck">&check;</span>Booking confirmed. Sat 9am</div>
+            <div class="row"><span class="ck">&check;</span>Owner notified via text</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shell"><p class="v-replay">&#x21bb; Replay call</p></div>
+</section>
+
+<!-- CLOSING -->
+<section class="v-close">
+  <div class="shell">
+    <div class="v-closecard">
+      <div class="v-kicker">Set and forget</div>
+      <h2 class="v-h2">Voice runs in the background.<br /><span class="fr">You run your business.</span></h2>
+      <p class="v-lead">Every missed call is a potential booking lost. Voice makes sure that doesn't happen. Quietly, reliably, on-brand. Turn it on once. It handles the phones from there.</p>
+      <a class="v-cta" href="https://fylo.co.nz/signup?next=/voice/connect">Connect Voice <span class="arw">&rarr;</span></a>
+
+      <div class="v-foot">
+        <span>Powered by <span class="fr">Fylo</span></span>
+        <span>Questions? <a href="mailto:hello@fylo.co.nz">hello@fylo.co.nz</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

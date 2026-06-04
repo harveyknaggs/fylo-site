@@ -1,0 +1,1957 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bills Employee &middot; About</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+/>
+
+<style>
+  :root {
+    --bg: #f6f2e9;
+    --bg-2: #efe9dc;
+    --paper: #fdfbf6;
+    --ink: #1f1812;
+    --ink-2: rgba(31, 24, 18, 0.62);
+    --ink-3: rgba(31, 24, 18, 0.40);
+    --line: rgba(31, 24, 18, 0.08);
+    --line-strong: rgba(31, 24, 18, 0.14);
+    --peach: #b86a38;
+    --peach-deep: #8a4d26;
+    --peach-soft: #f4dcc4;
+    --peach-wash: #faecd9;
+    --green: #3f7a57;
+    --green-soft: #d9ebde;
+    --amber: #b08231;
+    --slate: #5e6a78;
+    --slate-soft: #dee2e9;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: var(--ink);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+  .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, monospace; font-feature-settings: 'tnum' 1; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* ============================================================== */
+  /* HERO                                                             */
+  /* ============================================================== */
+  .hero {
+    padding: 60px 0 100px;
+    position: relative;
+    background: #ffffff;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 460px at 90% 0%, var(--peach-wash) 0%, transparent 55%),
+      radial-gradient(600px 380px at 10% 100%, rgba(63, 122, 87, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--peach); }
+
+  h1 {
+    margin: 0 0 24px;
+    font-size: 80px;
+    line-height: 0.96;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+  }
+  h1 .italic { font-weight: 400; }
+  h1 .stack { display: block; }
+  h1 .accent { color: var(--peach); }
+
+  .hero-lede {
+    font-size: 18px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    max-width: 480px;
+    margin: 0 0 36px;
+  }
+  .hero-lede .italic { color: var(--ink); }
+
+  .hero-cta-row { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+  .btn-primary {
+    background: var(--peach);
+    color: #fff;
+    border: 0;
+    padding: 16px 26px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px -8px rgba(184, 106, 56, 0.55), inset 0 1px 0 rgba(255,255,255,0.15);
+    transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -10px rgba(184, 106, 56, 0.65), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-primary .arrow { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+
+  .topnav { padding: 22px 0 0; }
+  .topnav-inner { display: flex; align-items: center; }
+  .back-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--ink-2); font-size: 13px; font-weight: 500; text-decoration: none;
+    padding: 6px 14px 6px 10px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--paper);
+    transition: background .15s, color .15s, border-color .15s, transform .15s;
+  }
+  .back-chip:hover { color: var(--ink); border-color: var(--line-strong); transform: translateX(-2px); }
+  .back-chip svg { width: 16px; height: 16px; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    padding: 15px 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .2s, border-color .2s;
+  }
+  .btn-ghost:hover { background: var(--paper); border-color: var(--ink-3); }
+
+  .hero-fine { font-size: 12.5px; color: var(--ink-3); }
+  .hero-fine .italic { color: var(--ink-2); }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 720px;
+  }
+  .invoice-stack {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: min(420px, 100%);
+  }
+
+  /* Subtle back paper (peeks out behind the main invoice) */
+  .paper-back {
+    position: absolute;
+    top: 14px;
+    right: -8px;
+    width: 100%;
+    height: 540px;
+    background: var(--paper);
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px var(--line), 0 20px 40px -24px rgba(31, 24, 18, 0.18);
+    transform: rotate(2.2deg);
+    transform-origin: top right;
+  }
+  .paper-back-2 {
+    position: absolute;
+    top: 26px;
+    right: 14px;
+    width: 100%;
+    height: 540px;
+    background: #fcfaf5;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px var(--line), 0 16px 32px -22px rgba(31, 24, 18, 0.12);
+    transform: rotate(-1.4deg);
+    transform-origin: top right;
+  }
+
+  /* The actual invoice */
+  .invoice {
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    padding: 30px 30px 26px;
+    box-shadow:
+      0 1px 0 rgba(31, 24, 18, 0.04),
+      0 0 0 1px var(--line),
+      0 36px 72px -28px rgba(31, 24, 18, 0.32),
+      0 16px 32px -16px rgba(31, 24, 18, 0.18);
+    transform: rotate(-0.6deg);
+    transform-origin: top right;
+    z-index: 2;
+    font-family: 'Geist', system-ui, sans-serif;
+    font-size: 11px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  /* Subtle paper texture via dotted grid */
+  .invoice::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(31, 24, 18, 0.025) 1px, transparent 1px);
+    background-size: 16px 16px;
+    background-position: 0 0;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .invoice > * { position: relative; }
+
+  /* Letterhead */
+  .inv-letterhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .inv-logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .inv-logo .badge {
+    display: inline-block;
+    background: #d83a2d;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 2px;
+    font-family: 'Geist', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-right: 4px;
+    vertical-align: 2px;
+  }
+  .inv-bizmeta {
+    text-align: right;
+    font-size: 9.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+  .inv-bizmeta .biz-name {
+    font-family: 'Geist', sans-serif;
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0;
+    margin-bottom: 3px;
+  }
+
+  /* Title row */
+  .inv-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+  }
+  .inv-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .inv-number {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-2);
+    text-align: right;
+  }
+  .inv-number .nlabel {
+    font-family: 'Geist', sans-serif;
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* Bill-to / Dates grid */
+  .inv-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+  .inv-meta .field .lbl {
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .inv-meta .field .v {
+    font-size: 11px;
+    color: var(--ink);
+  }
+  .inv-meta .field .v .italic {
+    font-size: 12px;
+  }
+
+  /* Line items table */
+  .inv-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+  }
+  .inv-table thead th {
+    text-align: left;
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0 0 6px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .inv-table thead th.num { text-align: right; }
+  .inv-table tbody td {
+    padding: 7px 0;
+    font-size: 10.5px;
+    color: var(--ink);
+    border-bottom: 1px dashed var(--line);
+    vertical-align: top;
+  }
+  .inv-table tbody td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .inv-table tbody td .sub {
+    font-size: 9.5px;
+    color: var(--ink-3);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Totals */
+  .inv-totals {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .inv-totals-inner {
+    min-width: 180px;
+  }
+  .inv-totals-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 10.5px;
+    color: var(--ink-2);
+  }
+  .inv-totals-row .v {
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .inv-totals-row.grand {
+    margin-top: 6px;
+    padding-top: 10px;
+    border-top: 1.5px solid var(--ink);
+  }
+  .inv-totals-row.grand .lbl {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .inv-totals-row.grand .v {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+
+  .inv-foot {
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line-strong);
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* AI "stamp" — the only Fylo-coloured thing on the invoice */
+  .ai-stamp {
+    position: absolute;
+    bottom: -40px;
+    left: -36px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 16px;
+    border-radius: 14px;
+    transform: rotate(-3deg);
+    box-shadow:
+      0 18px 32px -16px rgba(31, 24, 18, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 3;
+    max-width: 280px;
+  }
+  .ai-stamp-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--peach);
+    color: var(--paper);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 30px;
+  }
+  .ai-stamp-text {
+    font-size: 11px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .ai-stamp-text .italic {
+    font-size: 13px;
+    color: var(--peach-soft);
+  }
+  .ai-stamp-text strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .ai-stamp-text .code {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+  }
+
+  /* Small floating annotations that highlight extracted fields */
+  .extract-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--peach);
+    box-shadow: 0 0 0 4px rgba(184, 106, 56, 0.18);
+    z-index: 4;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .extract-dot.a { top: 168px; right: 42px; }
+  .extract-dot.b { top: 218px; right: 188px; }
+  .extract-dot.c { bottom: 144px; right: 38px; }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(184, 106, 56, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(184, 106, 56, 0); }
+  }
+  .phone::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 49px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--paper);
+    border-radius: 42px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Dynamic island */
+  .island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 28px;
+    background: #0a0807;
+    border-radius: 999px;
+    z-index: 3;
+  }
+
+  /* iOS status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 28px 0;
+    font-family: 'Geist', system-ui, sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    flex: 0 0 44px;
+  }
+  .status-bar .icons {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .status-bar svg path,
+  .status-bar svg rect,
+  .status-bar svg circle { fill: var(--ink); }
+
+  /* App header inside the screen */
+  .app-header {
+    padding: 14px 22px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .app-name {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+  .app-name .logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .app-name .name { color: var(--ink); }
+  .app-name .sep { color: var(--ink-3); margin: 0 2px; }
+  .live-mini {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--green);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .live-mini::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  /* Section label above the bill */
+  .bill-section-label {
+    padding: 4px 24px 14px;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .bill-section-label .italic {
+    color: var(--peach-deep);
+  }
+  .bill-section-label .sub {
+    display: block;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+
+  /* THE BILL CARD — floating receipt inside the phone */
+  .bill-card {
+    margin: 0 16px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 18px 18px 14px;
+    box-shadow:
+      0 1px 0 rgba(31, 24, 18, 0.04),
+      0 0 0 1px var(--line),
+      0 16px 28px -20px rgba(31, 24, 18, 0.16);
+    position: relative;
+    overflow: hidden;
+  }
+  .bill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--peach), var(--amber));
+  }
+  .bill-supplier {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 14px;
+  }
+  .bill-supplier .logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--peach-soft);
+    color: var(--peach-deep);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 36px;
+  }
+  .bill-supplier .meta .name {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .bill-supplier .meta .ref {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+  .bill-fields {
+    display: flex;
+    flex-direction: column;
+  }
+  .bill-field {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ink-2);
+    padding: 3px 0;
+  }
+  .bill-field .v {
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .bill-dotted {
+    margin: 8px 0;
+    height: 1px;
+    background-image: linear-gradient(to right, var(--line-strong) 50%, transparent 50%);
+    background-size: 5px 1px;
+    background-repeat: repeat-x;
+  }
+  .bill-field.total {
+    padding-top: 4px;
+    align-items: baseline;
+  }
+  .bill-field.total .lbl {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .bill-field.total .v {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  .bill-confidence {
+    margin-top: 14px;
+    background: var(--green-soft);
+    border-radius: 11px;
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--ink-2);
+  }
+  .bill-confidence::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(63, 122, 87, 0.18);
+    flex: 0 0 7px;
+  }
+  .bill-confidence .italic {
+    color: var(--green);
+    font-size: 12px;
+  }
+  .bill-confidence .code {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    background: rgba(63, 122, 87, 0.2);
+    color: var(--ink);
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  .bill-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+  }
+  .bill-actions button {
+    flex: 1;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: #fff;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+  }
+  .bill-actions button:hover { background: var(--bg); }
+  .bill-actions .primary {
+    flex: 1.6;
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .bill-actions .primary:hover {
+    background: #000;
+    transform: translateY(-1px);
+  }
+
+  /* What follows — small hint about what happens next */
+  .next-hint {
+    margin: 16px 18px 0;
+    padding: 12px 14px;
+    background: var(--bg);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    border: 1px dashed var(--line-strong);
+  }
+  .next-hint .arrow-down {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--peach-soft);
+    color: var(--peach-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex: 0 0 22px;
+  }
+  .next-hint .italic { color: var(--ink); }
+
+  /* Home indicator */
+  .home-bar {
+    margin-top: auto;
+    margin-bottom: 9px;
+    width: 120px;
+    height: 4px;
+    background: var(--ink);
+    border-radius: 999px;
+    align-self: center;
+    opacity: 0.85;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(102, 200, 135, 0.6); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(102, 200, 135, 0); }
+  }
+
+  /* Floating annotation labels around the phone */
+  .annot {
+    position: absolute;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.3;
+    z-index: 1;
+  }
+  .annot small {
+    display: block;
+    font-family: 'Geist', sans-serif;
+    font-style: normal;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .annot .line {
+    position: absolute;
+    background: var(--ink-3);
+    height: 1px;
+  }
+  .annot-1 { top: 30px; right: 400px; max-width: 140px; text-align: right; }
+  .annot-1 .line { top: 50%; left: 100%; margin-left: 6px; width: 28px; }
+  .annot-2 { bottom: 70px; right: 400px; max-width: 140px; text-align: right; }
+  .annot-2 .line { top: 50%; left: 100%; margin-left: 6px; width: 28px; }
+
+  /* ============================================================== */
+  /* DAY TIMELINE                                                     */
+  /* ============================================================== */
+  .day {
+    background: var(--bg);
+    padding: 100px 0 110px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-size: 56px;
+    line-height: 1.02;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin: 0 0 22px;
+    max-width: 760px;
+  }
+  .section-title .italic { font-weight: 400; }
+  .section-sub {
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    max-width: 560px;
+    margin: 0 0 64px;
+  }
+
+  .scenes {
+    display: grid;
+    gap: 16px;
+  }
+  .scene-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 1.2fr;
+    gap: 32px;
+    align-items: start;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .scene-row:first-child { border-top: none; padding-top: 0; }
+  .scene-row .time {
+    font-family: 'Geist Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-3);
+    letter-spacing: 0.03em;
+    padding-top: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .scene-row .time .day-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--peach);
+    font-size: 12.5px;
+    letter-spacing: -0.005em;
+  }
+  .scene-narr h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .scene-narr h3 .italic { font-weight: 400; }
+  .scene-narr p {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    max-width: 380px;
+    margin: 0;
+  }
+  .scene-narr p .italic { color: var(--ink); }
+  .scene-narr .actor {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    margin-top: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .scene-narr .actor .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .scene-narr .actor.you .dot { background: var(--peach); }
+  .scene-narr .actor.ai .dot { background: var(--green); }
+  .scene-narr .actor.bill .dot { background: var(--slate); }
+
+  /* Scene visual cards */
+  .scene-vis {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+    border: 1px solid var(--line);
+  }
+
+  /* Scene 1 — email arrives */
+  .vis-email {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .email {
+    background: var(--paper);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .email-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--peach-soft);
+    color: var(--peach-deep);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .email .from { color: var(--ink-3); font-size: 10px; letter-spacing: 0.04em; margin-bottom: 1px; }
+  .email .subj { color: var(--ink); font-size: 12px; }
+  .email .time-em { color: var(--ink-3); font-size: 10.5px; }
+  .email.attached .subj::after {
+    content: '📎';
+    margin-left: 6px;
+    font-size: 10px;
+    opacity: 0.5;
+  }
+  .email.highlight {
+    box-shadow: 0 0 0 1.5px var(--peach), 0 8px 20px -12px rgba(184, 106, 56, 0.3);
+    transform: translateX(4px);
+  }
+
+  /* Scene 2 — AI reading */
+  .vis-read {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .pdf-thumb {
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 12px 10px;
+    box-shadow: 0 0 0 1px var(--line);
+    font-size: 9px;
+    color: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .pdf-thumb .pdf-h {
+    font-size: 10px;
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .pdf-thumb .pdf-line { height: 4px; background: var(--line-strong); border-radius: 2px; }
+  .pdf-thumb .pdf-line.s { width: 60%; }
+  .pdf-thumb .pdf-line.xs { width: 40%; }
+  .pdf-thumb .pdf-total {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--line-strong);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+  }
+  .pdf-thumb .pdf-total .v {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 12px;
+  }
+  .read-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--green-soft);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    position: relative;
+  }
+  .read-arrow::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--green);
+    opacity: 0.4;
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .extracted {
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 10px 12px;
+    box-shadow: 0 0 0 1px var(--line);
+    font-size: 11px;
+  }
+  .extracted .field {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    color: var(--ink-2);
+  }
+  .extracted .field .v { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .extracted .field.code .v {
+    font-family: 'Geist Mono', monospace;
+    background: var(--green-soft);
+    color: var(--ink);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 10.5px;
+  }
+
+  /* Scene 3 — queued row */
+  .vis-queue {
+    background: var(--paper);
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px var(--line);
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .vis-queue .check {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--peach);
+    border-radius: 5px;
+    background: var(--peach);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  .vis-queue .qsup { font-size: 13px; font-weight: 500; }
+  .vis-queue .qref { font-size: 11px; color: var(--ink-3); font-family: 'Geist Mono', monospace; }
+  .vis-queue .qamt {
+    text-align: right;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .vis-queue + .vis-queue { margin-top: 6px; }
+  .vis-queue.muted .qsup, .vis-queue.muted .qamt { opacity: 0.4; }
+  .vis-queue.muted .check { background: transparent; border-color: var(--ink-3); color: transparent; }
+
+  /* Scene 4 — Xero confirmation */
+  .vis-xero {
+    text-align: center;
+    padding: 16px 12px;
+  }
+  .vis-xero .seal {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--green-soft);
+    color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .vis-xero .seal::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--green);
+    opacity: 0.25;
+  }
+  .vis-xero h4 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  .vis-xero .xsub {
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .vis-xero .xref {
+    margin-top: 14px;
+    padding: 8px 12px;
+    background: var(--paper);
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px var(--line);
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .vis-xero .xref .v {
+    font-family: 'Geist Mono', monospace;
+    color: var(--ink);
+  }
+
+  /* ============================================================== */
+  /* MATH                                                             */
+  /* ============================================================== */
+  .math {
+    padding: 100px 0;
+    background: var(--bg);
+  }
+  .math-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 56px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--line);
+    background: var(--paper);
+  }
+  .math-side {
+    padding: 36px 40px;
+    position: relative;
+  }
+  .math-side.before {
+    background: var(--bg-2);
+    border-right: 1px solid var(--line);
+  }
+  .math-side .h {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    font-weight: 500;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .math-side .h.peach { color: var(--peach); }
+  .math-side .h.green { color: var(--green); }
+  .math-side h3 {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 0 0 24px;
+    line-height: 1.2;
+  }
+  .math-side h3 .italic { font-weight: 400; }
+  .math-numbers {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 22px;
+  }
+  .math-num .v {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .math-num .v.dim { color: var(--ink-3); }
+  .math-num .v.bright { color: var(--peach); }
+  .math-num .l {
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .math-side ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .math-side ul li {
+    padding: 4px 0;
+    padding-left: 22px;
+    position: relative;
+  }
+  .math-side.before ul li::before {
+    content: '×';
+    position: absolute;
+    left: 4px;
+    color: var(--ink-3);
+    top: 4px;
+  }
+  .math-side.after ul li::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+  .math-side ul li .italic { color: var(--ink); }
+
+  /* ============================================================== */
+  /* SCOPE / TRUST                                                    */
+  /* ============================================================== */
+  .scope {
+    background: var(--bg);
+    padding: 100px 0;
+    border-top: 1px solid var(--line);
+  }
+  .scope-diagram {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+  }
+  .surface {
+    background: var(--bg);
+    border-radius: 18px;
+    padding: 28px;
+    position: relative;
+    border: 1px solid var(--line);
+  }
+  .surface-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .surface-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 1px var(--line);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--peach-deep);
+  }
+  .surface-logo.green { color: var(--green); }
+  .surface-logo.ink { color: var(--ink); }
+  .surface-name {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .surface-role {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+  .perm {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px dashed var(--line-strong);
+    font-size: 12.5px;
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+  .perm:nth-child(2) { border-top: none; }
+  .perm-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--green-soft);
+    color: var(--green);
+    flex: 0 0 18px;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .perm-icon.no {
+    background: rgba(176, 74, 58, 0.12);
+    color: var(--red, #b04a3a);
+  }
+  .perm-text .perm-label {
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+  .perm-text .perm-detail {
+    color: var(--ink-2);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* ============================================================== */
+  /* CTA                                                              */
+  /* ============================================================== */
+  .cta-band {
+    padding: 120px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(700px 360px at 50% 100%, var(--peach-wash) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-title {
+    position: relative;
+    font-size: 64px;
+    line-height: 1.02;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin: 0 auto 28px;
+    max-width: 760px;
+  }
+  .cta-title .italic { font-weight: 400; color: var(--peach); }
+  .cta-sub {
+    position: relative;
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    max-width: 520px;
+    margin: 0 auto 40px;
+  }
+  .cta-row {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .cta-fine {
+    position: relative;
+    margin-top: 22px;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  /* ============================================================== */
+  /* FOOTER                                                           */
+  /* ============================================================== */
+  footer {
+    padding: 32px 0 48px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; }
+  footer a { color: var(--ink-2); text-decoration: none; margin-left: 22px; }
+  footer a:hover { color: var(--ink); }
+
+  /* ----- Auto-cycle scene animation in hero phone ---------------- */
+  .phone-scene {
+    transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
+  }
+
+  @media (max-width: 880px) {
+    .hero-inner, .math-grid, .scope-diagram { grid-template-columns: 1fr; }
+    h1 { font-size: 56px; }
+    .section-title, .cta-title { font-size: 42px; }
+    .scene-row { grid-template-columns: 1fr; gap: 16px; }
+    .scene-row .time { flex-direction: row; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="wrap topnav-inner">
+    <a class="back-chip" href="/" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </a>
+  </div>
+</div>
+
+<!-- =============================================================== -->
+<!-- HERO                                                              -->
+<!-- =============================================================== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+
+      <div>
+        <h1>
+          <span class="stack">Supplier bills,</span>
+          <span class="stack italic accent">sorted by Monday.</span>
+        </h1>
+        <p class="hero-lede">
+          Your Bills Employee watches your inbox. The moment a supplier emails an invoice, it reads the PDF, picks the right Xero account code, and lines the bill up for your <span class="italic">one-tap approval.</span>
+        </p>
+        <div class="hero-cta-row">
+          <a href="https://fylo.co.nz/signup?next=/bills/connect" class="btn-primary">
+            Connect Bills Employee
+            <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="hero-fine">
+          Two-minute setup · <span class="italic">Gmail read-only, Xero drafts-only</span> · cancel any time
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="invoice-stack">
+          <!-- Stacked back papers for depth -->
+          <div class="paper-back"></div>
+          <div class="paper-back-2"></div>
+
+          <!-- The invoice itself -->
+          <div class="invoice">
+            <div class="inv-letterhead">
+              <div class="inv-logo">
+                <span class="badge">M10</span>MITRE 10
+              </div>
+              <div class="inv-bizmeta">
+                <div class="biz-name">Mitre 10 Mega Hornby</div>
+                <div>409 Main South Road, Hornby</div>
+                <div>Christchurch 8042, NZ</div>
+                <div>GST 67-892-118</div>
+              </div>
+            </div>
+
+            <div class="inv-title-row">
+              <div class="inv-title">Tax invoice.</div>
+              <div class="inv-number">
+                <span class="nlabel">Invoice no.</span>
+                INV-23874
+              </div>
+            </div>
+
+            <div class="inv-meta">
+              <div class="field">
+                <div class="lbl">Billed to</div>
+                <div class="v">Your Business Ltd<br/><span style="color:var(--ink-3);">Trade #44182</span></div>
+              </div>
+              <div class="field">
+                <div class="lbl">Issue date</div>
+                <div class="v">12 May 2026</div>
+              </div>
+              <div class="field">
+                <div class="lbl">Due</div>
+                <div class="v">26 May 2026<br/><span style="color:var(--ink-3); font-size: 9.5px;">14 days · 20th</span></div>
+              </div>
+            </div>
+
+            <table class="inv-table">
+              <thead>
+                <tr>
+                  <th style="width: 52%;">Description</th>
+                  <th class="num" style="width: 12%;">Qty</th>
+                  <th class="num" style="width: 16%;">Unit</th>
+                  <th class="num" style="width: 20%;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hardies Fibre Cement Sheet 2400×1200×6mm<div class="sub">SKU 218-441-09</div></td>
+                  <td class="num">8</td>
+                  <td class="num">$54.20</td>
+                  <td class="num">$433.60</td>
+                </tr>
+                <tr>
+                  <td>GIB Plasterboard 13mm Standard<div class="sub">SKU 117-882-21</div></td>
+                  <td class="num">4</td>
+                  <td class="num">$48.90</td>
+                  <td class="num">$195.60</td>
+                </tr>
+                <tr>
+                  <td>Resene Lumbersider Low Sheen 4L<div class="sub">SKU 882-991-04 &middot; "Triple Black White"</div></td>
+                  <td class="num">2</td>
+                  <td class="num">$52.20</td>
+                  <td class="num">$104.40</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="inv-totals">
+              <div class="inv-totals-inner">
+                <div class="inv-totals-row"><span>Subtotal</span><span class="v">$732.61</span></div>
+                <div class="inv-totals-row"><span>GST 15%</span><span class="v">$109.89</span></div>
+                <div class="inv-totals-row grand"><span class="lbl">Total due</span><span class="v">$842.50</span></div>
+              </div>
+            </div>
+
+            <div class="inv-foot">
+              <span>Pay via Direct Debit · ANZ 06-0837-0292-001</span>
+              <span>Thank you ·</span>
+            </div>
+          </div>
+
+          <!-- AI sticker / annotation -->
+          <div class="ai-stamp">
+            <div class="ai-stamp-avatar">f</div>
+            <div class="ai-stamp-text">
+              <span class="italic">Read &amp; coded.</span><br/>
+              <span class="code">5710</span> <strong>Building materials</strong>. Same as your last 23 Mitre 10 bills.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- DAY TIMELINE                                                      -->
+<!-- =============================================================== -->
+<section class="day">
+  <div class="wrap">
+    <div class="section-eyebrow">A day in the life</div>
+    <h2 class="section-title">Your Monday morning, <span class="italic">scripted.</span></h2>
+    <p class="section-sub">
+      Twelve bills land between Friday afternoon and Monday breakfast. By the time you've poured the coffee, the Bills Employee has already done the reading. Here's what happens, in order.
+    </p>
+
+    <div class="scenes">
+
+      <!-- Scene 1 — email arrives -->
+      <div class="scene-row">
+        <div class="time">
+          <span class="day-label">Sun · 4:12 pm</span>
+        </div>
+        <div class="scene-narr">
+          <h3>A supplier emails <span class="italic">an invoice.</span></h3>
+          <p>Mitre 10 pings your AP inbox with a PDF on a Sunday afternoon. You're at the beach. <span class="italic">The Bills Employee opens it for you.</span></p>
+          <div class="actor bill"><span class="dot"></span>Supplier</div>
+        </div>
+        <div class="scene-vis">
+          <div class="vis-email">
+            <div class="email">
+              <div class="email-avatar">M</div>
+              <div>
+                <div class="from">accounts@mitre10.co.nz</div>
+                <div class="subj">Invoice INV-23874</div>
+              </div>
+              <div class="time-em">4:12 pm</div>
+            </div>
+            <div class="email attached highlight">
+              <div class="email-avatar">M</div>
+              <div>
+                <div class="from">accounts@mitre10.co.nz</div>
+                <div class="subj">Invoice attached</div>
+              </div>
+              <div class="time-em">just now</div>
+            </div>
+            <div class="email" style="opacity: 0.5;">
+              <div class="email-avatar" style="background: var(--slate-soft); color: var(--slate);">L</div>
+              <div>
+                <div class="from">marketing@…</div>
+                <div class="subj">Newsletter, ignored</div>
+              </div>
+              <div class="time-em">3:55 pm</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 2 — AI reads -->
+      <div class="scene-row">
+        <div class="time">
+          <span class="day-label">Sun · 4:12 pm</span>
+          <span>+04 sec</span>
+        </div>
+        <div class="scene-narr">
+          <h3>Reads it. Codes it. <span class="italic">Files it.</span></h3>
+          <p>OCR pulls supplier, total, GST, and the invoice ref. It checks your last 90 days of coding. Mitre 10 bills always go to <strong style="font-weight:500;">5710 Building materials</strong>, so that's what it picks.</p>
+          <div class="actor ai"><span class="dot"></span>The Bills Employee</div>
+        </div>
+        <div class="scene-vis">
+          <div class="vis-read">
+            <div class="pdf-thumb">
+              <div class="pdf-h">INV-23874.pdf</div>
+              <div class="pdf-line"></div>
+              <div class="pdf-line s"></div>
+              <div class="pdf-line xs"></div>
+              <div class="pdf-line"></div>
+              <div class="pdf-line s"></div>
+              <div class="pdf-total"><span>Total</span><span class="v">$842.50</span></div>
+            </div>
+            <div class="read-arrow">→</div>
+            <div class="extracted">
+              <div class="field"><span>Supplier</span><span class="v">Mitre 10</span></div>
+              <div class="field"><span>Total</span><span class="v">$842.50</span></div>
+              <div class="field"><span>GST</span><span class="v">$109.89</span></div>
+              <div class="field"><span>Due</span><span class="v">26 May</span></div>
+              <div class="field code"><span>Code</span><span class="v">5710</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 3 — queued -->
+      <div class="scene-row">
+        <div class="time">
+          <span class="day-label">Mon · 9:42 am</span>
+          <span>+17 hr</span>
+        </div>
+        <div class="scene-narr">
+          <h3>Queued for your <span class="italic">one tap.</span></h3>
+          <p>By Monday morning the bill is at the top of your queue alongside eleven others. Each row tells you exactly why the AI is confident. Same supplier, same code, same shape as the last forty bills.</p>
+          <div class="actor ai"><span class="dot"></span>Today's queue</div>
+        </div>
+        <div class="scene-vis" style="padding: 16px;">
+          <div class="vis-queue">
+            <div class="check">✓</div>
+            <div>
+              <div class="qsup">Mitre 10 Mega Hornby</div>
+              <div class="qref">INV-23874 · 5710 Building materials</div>
+            </div>
+            <div class="qamt">$842.50</div>
+          </div>
+          <div class="vis-queue muted">
+            <div class="check"></div>
+            <div>
+              <div class="qsup">Placemakers Riccarton</div>
+              <div class="qref">INV-882041 · 5710 Building materials</div>
+            </div>
+            <div class="qamt">$1,284.20</div>
+          </div>
+          <div class="vis-queue muted">
+            <div class="check"></div>
+            <div>
+              <div class="qsup">BP Card Centre</div>
+              <div class="qref">CARD-04488 · 6320 Vehicle fuel</div>
+            </div>
+            <div class="qamt">$312.74</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 4 — push -->
+      <div class="scene-row">
+        <div class="time">
+          <span class="day-label">Mon · 9:51 am</span>
+          <span>+9 min</span>
+        </div>
+        <div class="scene-narr">
+          <h3>You tap. <span class="italic">It pushes.</span></h3>
+          <p>One thumb-tap (or <span class="mono" style="font-size:13px;">⌘↵</span> for the keyboard crowd) and the bill lands in Xero as a draft. Your usual payment run still owns the actual money. <span class="italic">Twelve seconds a bill. Not twenty minutes.</span></p>
+          <div class="actor you"><span class="dot"></span>You</div>
+        </div>
+        <div class="scene-vis">
+          <div class="vis-xero">
+            <div class="seal">✓</div>
+            <h4>Pushed to Xero</h4>
+            <div class="xsub">as a <span class="italic">draft bill</span>, ready for your payment run</div>
+            <div class="xref">
+              <span style="color: var(--ink-3); letter-spacing: 0.06em; font-size: 10.5px;">XERO DRAFT REF</span>
+              <span class="v">D-882044</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- MATH                                                              -->
+<!-- =============================================================== -->
+<section class="math">
+  <div class="wrap">
+    <div class="section-eyebrow">Why it works</div>
+    <h2 class="section-title">Bills <span class="italic">compound.</span> So does the time you spend on them.</h2>
+    <p class="section-sub">
+      The average small business spends three hours a month coding bills and chasing PDFs out of Gmail. We did the napkin math. <span class="italic">Yours might land lower.</span>
+    </p>
+
+    <div class="math-grid">
+
+      <div class="math-side before">
+        <div class="h">BEFORE</div>
+        <h3>The <span class="italic">old loop.</span></h3>
+        <div class="math-numbers">
+          <div class="math-num">
+            <div class="v dim">3<span style="font-size:24px;">h</span></div>
+            <div class="l">PER MONTH</div>
+          </div>
+          <div class="math-num">
+            <div class="v dim">~12<span style="font-size:24px;">m</span></div>
+            <div class="l">PER BILL</div>
+          </div>
+        </div>
+        <ul>
+          <li>Switch to Gmail, find the supplier email</li>
+          <li>Download the PDF, open it, squint at the GST line</li>
+          <li>Switch to Xero, type the supplier name, hunt the code</li>
+          <li>Realise this one's a duplicate, scroll back to last month</li>
+          <li>Tab back to Gmail, repeat <span class="italic">×11</span></li>
+        </ul>
+      </div>
+
+      <div class="math-side after">
+        <div class="h peach">AFTER</div>
+        <h3>With your <span class="italic">Bills Employee.</span></h3>
+        <div class="math-numbers">
+          <div class="math-num">
+            <div class="v bright">48<span style="font-size:24px;">s</span></div>
+            <div class="l">PER MONTH</div>
+          </div>
+          <div class="math-num">
+            <div class="v bright">~4<span style="font-size:24px;">s</span></div>
+            <div class="l">PER BILL</div>
+          </div>
+        </div>
+        <ul>
+          <li>Open the queue. <span class="italic">Everything's pre-coded.</span></li>
+          <li>Glance at the AI's reasoning, tap to approve</li>
+          <li>Duplicates and oddities are already flagged for you</li>
+          <li>Bill lands in Xero as a draft, ready for payment run</li>
+          <li>Two hours fifty-nine minutes back in your week</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- SCOPE / TRUST                                                     -->
+<!-- =============================================================== -->
+<section class="scope">
+  <div class="wrap">
+    <div class="section-eyebrow">What it touches</div>
+    <h2 class="section-title">A narrow, <span class="italic">honest scope.</span></h2>
+    <p class="section-sub">
+      Three surfaces. Read-only where it can be, write-only-as-a-draft where it must be. Money never moves without your hand.
+    </p>
+
+    <div class="scope-diagram">
+
+      <div class="surface">
+        <div class="surface-head">
+          <div class="surface-logo">G</div>
+          <div>
+            <div class="surface-name">Gmail</div>
+            <div class="surface-role">SCOPE · READ ONLY</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon">✓</div>
+          <div class="perm-text">
+            <div class="perm-label">Reads supplier invoice emails</div>
+            <div class="perm-detail">PDFs from senders that match a known supplier. Everything else is ignored.</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon no">×</div>
+          <div class="perm-text">
+            <div class="perm-label">Reads anything else</div>
+            <div class="perm-detail">Personal mail, calendar invites, marketing. Out of scope. Always.</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon no">×</div>
+          <div class="perm-text">
+            <div class="perm-label">Sends or deletes</div>
+            <div class="perm-detail">No write access. Cannot reply, archive, label, or remove a single message.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="surface">
+        <div class="surface-head">
+          <div class="surface-logo ink">F</div>
+          <div>
+            <div class="surface-name">Fylo (this app)</div>
+            <div class="surface-role">SCOPE · YOUR APPROVAL</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon">✓</div>
+          <div class="perm-text">
+            <div class="perm-label">Queues bills for your tap</div>
+            <div class="perm-detail">Every bill, every time. The AI proposes; you dispose.</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon">✓</div>
+          <div class="perm-text">
+            <div class="perm-label">Learns from your edits</div>
+            <div class="perm-detail">Re-code something once and the next bill from the same supplier comes pre-coded that way.</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon no">×</div>
+          <div class="perm-text">
+            <div class="perm-label">Auto-approves anything</div>
+            <div class="perm-detail">Every bill needs your green light. Unless you opt a single supplier in to small-dollar auto-approve.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="surface">
+        <div class="surface-head">
+          <div class="surface-logo green">X</div>
+          <div>
+            <div class="surface-name">Xero</div>
+            <div class="surface-role">SCOPE · DRAFTS ONLY</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon">✓</div>
+          <div class="perm-text">
+            <div class="perm-label">Pushes draft bills</div>
+            <div class="perm-detail">Lands in your bills inbox, ready for your normal payment run.</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon no">×</div>
+          <div class="perm-text">
+            <div class="perm-label">Pays a supplier</div>
+            <div class="perm-detail">Cannot move a cent. Payment authority stays in your hands.</div>
+          </div>
+        </div>
+        <div class="perm">
+          <div class="perm-icon no">×</div>
+          <div class="perm-text">
+            <div class="perm-label">Edits anything other than bills</div>
+            <div class="perm-detail">No payroll, no reconciliation, no chart-of-accounts changes. Bills draft scope, full stop.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- CTA                                                               -->
+<!-- =============================================================== -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2 class="cta-title">Get back the <span class="italic">three hours.</span></h2>
+    <p class="cta-sub">
+      Connect Gmail and Xero in two minutes. Your first ten bills are free. See how it codes them before you decide if it stays.
+    </p>
+    <div class="cta-row">
+      <a href="https://fylo.co.nz/signup?next=/bills/connect" class="btn-primary">
+        Connect Bills Employee
+        <span class="arrow">→</span>
+      </a>
+    </div>
+    <div class="cta-fine">No card. Read-only Gmail. Drafts-only Xero. Cancel any time.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Bills Employee · <span class="italic" style="color: var(--ink-2);">live</span></div>
+    <div>
+      <a href="Today's Queue.html">Today's queue</a>
+      <a href="Suppliers.html">Suppliers</a>
+      <a href="#">Settings</a>
+      <a href="#">Help</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

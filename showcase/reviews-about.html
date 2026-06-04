@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Review Employee · About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sa-accent: #4f46e5;
+  --sa-accent-2: #7c3aed;
+  --sa-accent-soft: #eef2ff;
+  --sa-accent-wash: #f5f3ff;
+  --sa-ink: #0b1220;
+  --sa-ink-2: #1e293b;
+  --sa-muted: #475569;
+  --sa-faded: #94a3b8;
+  --sa-hairline: #e8eaef;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: "ss01";
+  background: #fafafe;
+  color: var(--sa-ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5; font-size: 14px;
+  min-height: 100vh; position: relative; overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+.aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.aurora::before, .aurora::after { content: ""; position: absolute; border-radius: 50%; filter: blur(80px); opacity: .4; }
+.aurora::before { width: 500px; height: 500px; background: radial-gradient(closest-side, #c7d2fe, transparent 70%); top: -200px; left: 280px; }
+.aurora::after { width: 400px; height: 400px; background: radial-gradient(closest-side, #fbcfe8, transparent 70%); top: 80px; right: 80px; }
+
+.layout { position: relative; z-index: 1; }
+.shell { padding: 56px 48px 100px; max-width: 1100px; margin: 0 auto; }
+
+.nav-stub {
+  display: flex; align-items: center; gap: 24px;
+  padding: 14px 32px;
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  position: relative; z-index: 2;
+  font-size: 13px; color: var(--sa-muted);
+}
+.nav-stub strong { color: var(--sa-ink); font-weight: 700; }
+.nav-stub span.active { color: var(--sa-accent); font-weight: 600; }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--sa-muted); font-size: 13px; font-weight: 500;
+  padding: 6px 12px 6px 8px; border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.08); background: rgba(255,255,255,.6);
+  transition: background .15s, color .15s, border-color .15s, transform .15s;
+}
+.nav-back:hover { background: #fff; color: var(--sa-ink); border-color: rgba(11,18,32,.16); transform: translateX(-2px); }
+.nav-back svg { width: 16px; height: 16px; }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--sa-faded); margin-bottom: 14px;
+}
+.eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--sa-faded); }
+
+/* HERO */
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 360px;
+  gap: 60px; align-items: center;
+}
+.hero-text h1 {
+  font-size: 56px; line-height: 1.02; letter-spacing: -0.03em;
+  font-weight: 600; color: var(--sa-ink); margin: 0 0 16px;
+}
+.hero-text h1 em {
+  font-family: 'Instrument Serif', ui-serif, serif;
+  font-style: italic; font-weight: 400;
+  background: linear-gradient(135deg, #4f46e5, #10b981);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-sub { font-size: 17px; color: var(--sa-muted); margin: 0 0 28px; max-width: 540px; }
+
+.cta-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, var(--sa-accent), var(--sa-accent-2));
+  color: #fff;
+  border-radius: 999px;
+  font-size: 14px; font-weight: 600;
+  box-shadow: 0 8px 20px -8px rgba(79,70,229,.5), inset 0 1px 0 rgba(255,255,255,.2);
+  border: 0;
+}
+
+/* PHONE FRAME ----------------------------------------------------- */
+.phone-wrap { position: relative; width: 320px; height: 620px; margin: 0 auto; }
+.phone {
+  position: absolute; inset: 0;
+  background: #0b1220;
+  border-radius: 44px;
+  padding: 12px;
+  box-shadow:
+    0 30px 60px -20px rgba(79,70,229,.35),
+    0 10px 30px -10px rgba(11,18,32,.3),
+    inset 0 0 0 2px rgba(255,255,255,.06);
+  transform: rotate(-2deg);
+}
+.phone::before {
+  content: ""; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 24px;
+  background: #0b1220; border-radius: 0 0 14px 14px; z-index: 5;
+}
+.screen {
+  position: relative;
+  width: 100%; height: 100%;
+  border-radius: 34px;
+  overflow: hidden;
+  background: #ffffff;
+}
+.screen > .scr-email,
+.screen > .scr-review {
+  position: absolute;
+  inset: 0;
+}
+
+/* Tab bar under phone — shows step + replay */
+.phone-tools {
+  display: flex; gap: 4px; justify-content: center; align-items: center;
+  position: absolute; bottom: -44px; left: 0; right: 0;
+}
+.phone-tools .step {
+  background: rgba(11,18,32,.06);
+  border: 1px solid transparent;
+  color: var(--sa-muted);
+  padding: 6px 14px;
+  font-size: 12px; font-weight: 600;
+  border-radius: 999px;
+  transition: all .18s;
+}
+.phone-tools .step.active { background: #fff; color: var(--sa-accent); border-color: rgba(79,70,229,.32); box-shadow: 0 4px 10px -4px rgba(11,18,32,.12); }
+.phone-tools .step:hover:not(.active) { background: rgba(11,18,32,.1); }
+.phone-tools .replay {
+  margin-left: 6px;
+  background: transparent; color: var(--sa-faded);
+  padding: 6px 10px; font-size: 12px; font-weight: 500;
+  border-radius: 999px; border: 0;
+}
+.phone-tools .replay:hover { color: var(--sa-accent); background: rgba(11,18,32,.04); }
+
+/* SCREEN 1: Email card -------------------------------------------- */
+.scr-email {
+  background: #ffffff;
+  padding: 14px 12px 8px;
+  height: 100%; overflow-y: auto;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f172a;
+}
+.email-status {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 4px 8px 8px;
+  font-size: 11px; font-weight: 600; color: #0f172a;
+}
+.email-status .right { display: flex; gap: 4px; align-items: center; font-size: 10px; }
+.email-status .battery { width: 18px; height: 9px; border: 1px solid #0f172a; border-radius: 2px; padding: 1px; }
+.email-status .battery i { display: block; width: 70%; height: 100%; background: #0f172a; border-radius: 1px; }
+.email-meta {
+  font-size: 10.5px; color: #64748b; display: flex; justify-content: space-between;
+  padding: 0 4px 8px;
+}
+.email-from {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 4px 14px; border-bottom: 1px solid #eef0f4; margin-bottom: 12px;
+}
+.email-from-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, #4f46e5, #10b981);
+  color: #fff; font-weight: 700; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.email-from-body { flex: 1; min-width: 0; }
+.email-from-name { font-weight: 600; font-size: 12px; color: #0f172a; }
+.email-from-sub { font-size: 10.5px; color: #64748b; }
+
+/* Email body — Card A miniaturised */
+.email-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #eef0f4;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -16px rgba(60,40,90,.2);
+}
+.email-card-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899, #f97316, #ec4899, #a855f7, #6366f1);
+  background-size: 200% 100%;
+  animation: shimmer 5s linear infinite;
+}
+@keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+.email-card-eyebrow {
+  text-align: center; font-size: 8.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: #94a3b8; font-weight: 600;
+  padding: 18px 16px 8px;
+}
+.email-card-eyebrow strong { color: #64748b; font-weight: 600; }
+.email-card h1 {
+  text-align: center;
+  margin: 0; padding: 4px 16px 6px;
+  font-size: 18px; font-weight: 700; color: #0f172a;
+  letter-spacing: -0.015em; line-height: 1.2;
+}
+.email-card h1 em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic; font-weight: 400; font-size: 20px;
+}
+.email-card-sub {
+  text-align: center;
+  padding: 8px 22px 14px;
+  font-size: 11px; line-height: 1.5; color: #64748b;
+  margin: 0;
+}
+.email-cta-wrap { text-align: center; padding: 0 16px 14px; }
+.email-cta {
+  display: inline-block;
+  background: #0b0b14; color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 12px; font-weight: 600; letter-spacing: -.005em;
+  animation: pulse 3s ease-in-out infinite;
+  border: 0; cursor: pointer;
+  transition: transform .15s;
+}
+.email-cta:hover { transform: translateY(-1px) scale(1.02); }
+@keyframes pulse {
+  0%,100% { box-shadow: 0 6px 24px -8px rgba(139,92,246,.45); }
+  50%     { box-shadow: 0 10px 32px -8px rgba(236,72,153,.55), 0 0 0 6px rgba(236,72,153,0); }
+}
+.email-card-stars {
+  text-align: center; font-size: 16px; color: #a855f7; letter-spacing: 4px;
+  padding: 0 16px 6px;
+}
+.email-card-five {
+  text-align: center; font-size: 10px; color: #94a3b8;
+  padding: 0 16px 16px;
+}
+.email-card-divider { height: 1px; background: #eef0f4; margin: 0 16px; }
+.email-card-foot {
+  text-align: center; padding: 12px 18px 18px;
+  font-size: 9.5px; color: #94a3b8; line-height: 1.5;
+}
+.email-card-foot strong { color: #475569; font-weight: 600; }
+
+/* SCREEN 2: Review page  ------------------------------------------ */
+.scr-review {
+  background: #f0eee9;
+  padding: 14px 12px;
+  height: 100%; overflow-y: auto;
+  font-family: Inter, sans-serif;
+  color: #0f172a;
+}
+.rv-status { /* iOS-style status bar at top of phone screen */
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 2px 6px 10px;
+  font-size: 11px; font-weight: 600; color: #0f172a;
+}
+.rv-status .right { display: flex; gap: 4px; align-items: center; font-size: 10px; }
+.rv-status .battery { width: 18px; height: 9px; border: 1px solid #0f172a; border-radius: 2px; padding: 1px; }
+.rv-status .battery i { display: block; width: 70%; height: 100%; background: #0f172a; border-radius: 1px; }
+
+.rv-card {
+  position: relative;
+  background: #ffffff; border-radius: 14px;
+  padding: 22px 18px 16px;
+  box-shadow: 0 1px 0 rgba(20,20,30,0.02), 0 16px 40px -24px rgba(60,40,90,0.25);
+  overflow: hidden;
+}
+.rv-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899, #f97316, #ec4899, #a855f7, #6366f1);
+  background-size: 200% 100%;
+  animation: shimmer 5s linear infinite;
+}
+.rv-eyebrow {
+  text-align: center;
+  font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: #94a3b8; font-weight: 600; margin-bottom: 10px;
+}
+.rv-eyebrow strong { color: #64748b; font-weight: 600; }
+.rv-h1 {
+  text-align: center; margin: 0 0 6px;
+  font-size: 19px; font-weight: 700; color: #0f172a;
+  letter-spacing: -0.015em; line-height: 1.15;
+}
+.rv-h1 em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic; font-weight: 400; font-size: 22px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.rv-sub {
+  text-align: center; margin: 0 auto 18px;
+  font-size: 11px; line-height: 1.5; color: #64748b;
+  max-width: 240px;
+}
+.rv-stars {
+  position: relative;
+  display: flex; justify-content: center; gap: 6px;
+  margin-bottom: 10px;
+}
+.rv-star-cell {
+  position: relative; width: 30px; height: 30px;
+  color: #cbd5e1;
+  transition: transform .18s cubic-bezier(.2,.7,.3,1), filter .18s;
+}
+.rv-star-cell.is-lit { filter: drop-shadow(0 4px 12px rgba(168,85,247,0.5)); }
+.rv-star-cell.is-locked { transform: scale(1.12); }
+.rv-star-zone {
+  position: absolute; top: 0; bottom: 0; width: 50%;
+  background: transparent; border: 0; padding: 0;
+  z-index: 1;
+}
+.rv-star-zone-l { left: 0; }
+.rv-star-zone-r { right: 0; }
+.rv-star-out { position: absolute; inset: 0; pointer-events: none; }
+.rv-star-fill {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: clip-path .12s ease;
+}
+.rv-hint {
+  text-align: center;
+  font-size: 11px; font-weight: 500; color: #94a3b8; min-height: 16px;
+  margin-bottom: 14px; transition: color .2s;
+}
+.rv-hint.is-active { color: #0f172a; }
+.rv-cta-row { display: flex; justify-content: center; margin-bottom: 14px; }
+.rv-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 16px; border-radius: 999px;
+  border: 0; font: 600 12px Inter, sans-serif;
+  transition: background .25s, transform .15s, color .25s;
+}
+.rv-cta.is-ready {
+  background: #0b0b14; color: #fff;
+  animation: pulse 3s ease-in-out infinite;
+}
+.rv-cta.is-ready:hover { transform: translateY(-1px) scale(1.02); }
+.rv-cta.is-idle {
+  background: #f1f0ec; color: #94a3b8;
+  border: 1px solid #e5e4dd; cursor: default;
+}
+.rv-divider { height: 1px; background: #eef0f4; margin: 6px -6px 12px; }
+.rv-foot {
+  text-align: center; font-size: 9.5px; color: #94a3b8; line-height: 1.6;
+}
+.rv-foot strong { color: #64748b; font-weight: 600; }
+
+/* SCREEN 3: Thanks ------------------------------------------------ */
+.thanks-stars {
+  display: flex; justify-content: center; gap: 4px;
+  margin: 4px 0 14px;
+}
+.thanks-stars .rv-star-cell { width: 18px; height: 18px; }
+.rv-google-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px; border-radius: 999px;
+  background: #fff; color: #1f2937;
+  border: 1px solid #e5e7eb;
+  font: 600 12px Inter, sans-serif;
+  text-decoration: none;
+  box-shadow: 0 6px 16px -10px rgba(15,23,42,0.25);
+  transition: transform .15s;
+}
+.rv-google-btn:hover { transform: translateY(-1px); }
+.rv-google-btn svg { width: 14px; height: 14px; }
+.rv-or-row {
+  display: flex; align-items: center; gap: 8px;
+  margin: 4px 0 10px;
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em;
+  color: #94a3b8;
+}
+.rv-or-row::before, .rv-or-row::after { content: ""; flex: 1; height: 1px; background: #eef0f4; }
+.rv-feedback {
+  display: block; width: 100%;
+  background: #faf9f5; border: 1px solid #e9e7df;
+  border-radius: 8px; padding: 8px;
+  font: 400 11px Inter, sans-serif; color: #0f172a;
+  resize: none; min-height: 60px;
+  margin-bottom: 8px;
+}
+.rv-feedback:focus { outline: none; border-color: #a855f7; background: #fff; }
+.rv-private-note {
+  text-align: center; font-size: 9.5px; color: #94a3b8;
+  margin: 0 auto 10px; line-height: 1.4;
+}
+.rv-private-note strong { color: #64748b; font-weight: 600; }
+.rv-fields {
+  display: flex; flex-direction: column; gap: 10px;
+  margin: 6px 0 12px;
+}
+.rv-fields > div { display: flex; flex-direction: column; gap: 4px; }
+.rv-field-label {
+  font-size: 10px; font-weight: 600; color: #475569;
+  letter-spacing: 0.01em;
+}
+.rv-input {
+  display: block; width: 100%;
+  background: #faf9f5; border: 1px solid #e9e7df;
+  border-radius: 8px; padding: 8px 10px;
+  font: 400 11px Inter, sans-serif; color: #0f172a;
+}
+.rv-input:focus { outline: none; border-color: #a855f7; background: #fff; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* HOW IT WORKS  --------------------------------------------------- */
+.steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  margin-top: 80px;
+}
+.step {
+  background: #fff; border: 1px solid var(--sa-hairline);
+  border-radius: 22px; padding: 26px; position: relative;
+}
+.step::before {
+  content: ""; position: absolute; top: 0; left: 22px; right: 22px; height: 2px;
+  background: linear-gradient(90deg, var(--sa-accent), var(--sa-accent-2));
+  border-radius: 0 0 4px 4px;
+}
+.step-num {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: 22px; color: var(--sa-accent); margin-bottom: 12px;
+}
+.step h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -0.015em; font-weight: 600; color: var(--sa-ink); }
+.step p { margin: 0; font-size: 13.5px; color: var(--sa-muted); line-height: 1.55; }
+
+/* BAND (no button) */
+.band {
+  margin-top: 64px; padding: 32px;
+  background: linear-gradient(135deg, var(--sa-accent-wash), #fff);
+  border: 1px solid var(--sa-hairline);
+  border-radius: 22px;
+}
+.band-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--sa-faded); margin-bottom: 8px;
+}
+.band h2 {
+  margin: 0 0 8px; font-size: 26px; line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 600; color: var(--sa-ink); max-width: 720px;
+}
+.band h2 em {
+  font-family: 'Instrument Serif', ui-serif, serif; font-style: italic;
+  color: var(--sa-accent); font-weight: 400;
+}
+.band p { margin: 0; font-size: 14px; color: var(--sa-muted); max-width: 720px; }
+
+.mockup-label {
+  position: fixed; top: 12px; right: 12px;
+  background: #0b1220; color: #fff;
+  padding: 6px 12px; border-radius: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  z-index: 100; opacity: .8;
+}
+
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .phone-wrap { width: 280px; height: 540px; }
+}
+@media (max-width: 720px) {
+  .steps { grid-template-columns: 1fr; }
+  .hero-text h1 { font-size: 40px; }
+  .shell { padding: 36px 20px 60px; }
+}
+</style>
+</head>
+<body>
+<div class="aurora"></div>
+
+<nav class="nav-stub">
+  <a class="nav-back" href="/" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+    </svg>
+    Back
+  </a>
+  <strong>Review Employee</strong>
+</nav>
+
+<div class="layout">
+  <div class="shell">
+
+    <!-- HERO  -->
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>
+          Meet your <em>Review Employee.</em><br>
+          Your Google reviews, on autopilot.
+        </h1>
+        <p class="hero-sub">
+          Your Review Employee watches Xero. The moment an invoice is marked paid, it sends the customer a friendly review request from your business, in your tone, and lands them on a one-tap Google review page. No reminders, no copy-paste, no chasing.
+        </p>
+        <div class="cta-row">
+          <a class="btn-primary" href="https://fylo.co.nz/signup?next=/stellar/connect">
+            Connect Review Employee
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </div>
+        <p style="font-size:12px; color:#94a3b8; margin-top:16px; max-width:300px;">
+          &larr; Tap the phone to walk through what your customer sees.
+        </p>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="screen" id="screen">
+            <!-- screens injected by JS -->
+          </div>
+        </div>
+        <div class="phone-tools">
+          <button class="step active" data-go="email">Email</button>
+          <button class="step" data-go="rate">Review</button>
+          <button class="step" data-go="thanks">Thanks</button>
+          <button class="replay" id="btn-replay">↻ Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS  -->
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Connect once</h3>
+        <p>Sign in to Xero and paste your Google review link. Your Review Employee handles the rest. Sub-two-minute setup, no per-customer config.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Invoice paid &rarr; send</h3>
+        <p>Every paid invoice triggers a review request from <strong>reviews@fylo.co.nz</strong> on your behalf. You set the timing, tone, and template once.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Reviews land themselves</h3>
+        <p>One tap from your customer's inbox to a Google review. Track sends, opens, and conversions on the Review Employee page. Pause any time.</p>
+      </div>
+    </div>
+
+    <!-- BAND (no button) -->
+    <div class="band">
+      <div class="band-eyebrow">Why it works</div>
+      <h2>Reviews <em>compound</em>. Your Review Employee makes asking the default, not the chore.</h2>
+      <p>Most businesses earn 1 Google review for every 50 jobs. Businesses that ask every customer earn 1 in 10. Your Review Employee is the asking. Automated, on-brand, polite.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const STAR_PATH = "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z";
+const HINTS = ["Tap a star to rate","Not great","Could be better","It was okay","Pretty good!","Loved it"];
+const HIGH_THRESHOLD = 4.5;
+const BUSINESS = "Your Business";
+const CUSTOMER = "Sarah";
+
+let state = { screen: "email", rating: 0, hover: 0, feedback: "" };
+
+function formatRating(n){ return n % 1 === 0 ? String(n) : n.toFixed(1); }
+
+function starSvg(filled){
+  const fill = filled ? "url(#rv-grad)" : "transparent";
+  const stroke = filled ? "transparent" : "currentColor";
+  return `<svg viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:block;width:100%;height:100%;"><path d="${STAR_PATH}"/></svg>`;
+}
+
+function halfStar(slot, active, klass) {
+  let pct = active >= slot ? 100 : active === slot - 0.5 ? 50 : 0;
+  return `
+    <div class="rv-star-cell ${klass || ""}">
+      <div class="rv-star-out">${starSvg(false)}</div>
+      ${pct > 0 ? `<div class="rv-star-fill" style="clip-path: inset(0 ${100 - pct}% 0 0);">${starSvg(true)}</div>` : ""}
+      <button class="rv-star-zone rv-star-zone-l" data-r="${slot - 0.5}" aria-label="${slot - 0.5} stars"></button>
+      <button class="rv-star-zone rv-star-zone-r" data-r="${slot}" aria-label="${slot} stars"></button>
+    </div>`;
+}
+function staticHalfStar(slot, active) {
+  let pct = active >= slot ? 100 : active === slot - 0.5 ? 50 : 0;
+  return `<div class="rv-star-cell"><div class="rv-star-out">${starSvg(false)}</div>${pct > 0 ? `<div class="rv-star-fill" style="clip-path: inset(0 ${100 - pct}% 0 0);">${starSvg(true)}</div>` : ""}</div>`;
+}
+
+function gradientDefs(){
+  return `<svg width="0" height="0" style="position:absolute;"><defs><linearGradient id="rv-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="55%" stop-color="#e879f9"/><stop offset="100%" stop-color="#f9a8d4"/></linearGradient></defs></svg>`;
+}
+
+function renderEmail(){
+  return `
+    <div class="scr-email">
+      <div class="email-status">
+        <span>9:41</span>
+        <div class="right"><span>5G</span><span class="battery"><i></i></span></div>
+      </div>
+      <div class="email-meta"><span>Inbox &middot; Just now</span><span>Mail</span></div>
+      <div class="email-from">
+        <div class="email-from-icon">R</div>
+        <div class="email-from-body">
+          <div class="email-from-name">${BUSINESS}</div>
+          <div class="email-from-sub">reviews@fylo.co.nz &middot; to ${CUSTOMER}</div>
+        </div>
+      </div>
+      <div class="email-card">
+        <div class="email-card-bar"></div>
+        <div class="email-card-eyebrow">A note from <strong>${BUSINESS}</strong></div>
+        <h1>Hi ${CUSTOMER}, how did <em>we&nbsp;do?</em></h1>
+        <p class="email-card-sub">Thanks for choosing ${BUSINESS}. Mind sharing how the job went? Five seconds, no account needed. It really helps us out.</p>
+        <div class="email-cta-wrap"><button class="email-cta" id="email-cta">Leave a quick review &nbsp;&rsaquo;</button></div>
+        <div class="email-card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="email-card-five">Five seconds. No account needed.</div>
+        <div class="email-card-divider"></div>
+        <div class="email-card-foot">
+          Sent by <strong>${BUSINESS}</strong> via <strong>Fylo</strong>.<br>
+          Reply to this email and it goes straight to ${BUSINESS}.
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderRate(){
+  const active = state.hover || state.rating;
+  const stars = [1,2,3,4,5].map(slot => {
+    const isLit = active >= slot;
+    const locked = !state.hover && Math.ceil(state.rating) === slot;
+    return halfStar(slot, active, `${isLit ? "is-lit" : ""} ${locked ? "is-locked" : ""}`);
+  }).join("");
+  const hintIdx = active ? Math.ceil(active) : 0;
+  return `
+    ${gradientDefs()}
+    <div class="scr-review">
+      <div class="rv-status">
+        <span>9:41</span>
+        <div class="right"><span>5G</span><span class="battery"><i></i></span></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-bar"></div>
+        <div class="rv-eyebrow">A review for <strong>${BUSINESS}</strong></div>
+        <h1 class="rv-h1">How was <em>it?</em></h1>
+        <p class="rv-sub">Tap a star. That's all we need. No login, no form.</p>
+        <div class="rv-stars" id="rv-stars">${stars}</div>
+        <div class="rv-hint ${active ? "is-active" : ""}">${HINTS[hintIdx]}</div>
+        <div class="rv-cta-row">
+          <button class="rv-cta ${state.rating ? "is-ready" : "is-idle"}" id="rv-send" ${state.rating ? "" : "disabled"}>
+            ${state.rating ? `Send ${formatRating(state.rating)}-star review` : "Pick a rating first"}
+            ${state.rating ? `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>` : ""}
+          </button>
+        </div>
+        <div class="rv-divider"></div>
+        <div class="rv-foot">
+          Sent by <strong>${BUSINESS}</strong> via <strong>Fylo</strong>.<br>
+          Reply to the email and it goes straight to the team.
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderThanks(){
+  const r = state.rating || 5; // fall back to 5 if user jumped directly via tabs
+  const high = r >= HIGH_THRESHOLD;
+  const thStars = [1,2,3,4,5].map(slot => staticHalfStar(slot, r)).join("");
+  return `
+    ${gradientDefs()}
+    <div class="scr-review">
+      <div class="rv-status">
+        <span>9:41</span>
+        <div class="right"><span>5G</span><span class="battery"><i></i></span></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-bar"></div>
+        <div class="rv-eyebrow">A review for <strong>${BUSINESS}</strong></div>
+        <h1 class="rv-h1">${high ? `Thanks, <em>so much.</em>` : `Tell us what we <em>missed.</em>`}</h1>
+        <p class="rv-sub">${high
+          ? `Would you mind sharing that on Google? It takes a few seconds and it helps ${BUSINESS} more than you'd think.`
+          : `Share what could've gone better. Publicly on Google, or privately just to the team.`}</p>
+        <div class="thanks-stars">${thStars}</div>
+        ${!high ? `
+          <div class="rv-fields">
+            <div>
+              <label class="rv-field-label">Your name</label>
+              <input class="rv-input" type="text" value="Alex Mitchell" readonly>
+            </div>
+            <div>
+              <label class="rv-field-label">Email</label>
+              <input class="rv-input" type="email" value="alex@example.com" readonly>
+            </div>
+            <div>
+              <label class="rv-field-label">Phone</label>
+              <input class="rv-input" type="tel" value="021 412 8842" readonly>
+            </div>
+            <div>
+              <label class="rv-field-label">What could have gone better?</label>
+              <textarea class="rv-feedback" id="rv-feedback" placeholder="A sentence or two is plenty.">${state.feedback}</textarea>
+            </div>
+          </div>
+          <div class="rv-cta-row">
+            <button class="rv-cta is-ready">
+              Send to ${BUSINESS}
+            </button>
+          </div>
+          <p class="rv-private-note">Only <strong>${BUSINESS}</strong> sees these details. Fylo never posts on your behalf.</p>
+          <div class="rv-divider"></div>
+          <div class="rv-foot">
+            Sent by <strong>${BUSINESS}</strong> via <strong>Fylo</strong>.<br>
+            Reply to the email and it goes straight to the team.
+          </div>
+          <div class="rv-or-row">or share publicly on Google</div>
+          <div class="rv-cta-row">
+            <a class="rv-google-btn" href="#" id="google-btn">
+              <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.5-.2-2.3H12v4.3h6.5c-.3 1.5-1.1 2.7-2.4 3.5v2.9h3.9c2.3-2.1 3.5-5.2 3.5-8.4z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-2.9c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3C3.4 21.4 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.2-1.7.4-2.4V6.7H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.3l4-3z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4C17.9 1.2 15.2 0 12 0 7.4 0 3.4 2.6 1.4 6.7l4 3C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+              Share on Google
+            </a>
+          </div>
+        ` : `
+          <div class="rv-cta-row">
+            <a class="rv-google-btn" href="#" id="google-btn">
+              <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.5-.2-2.3H12v4.3h6.5c-.3 1.5-1.1 2.7-2.4 3.5v2.9h3.9c2.3-2.1 3.5-5.2 3.5-8.4z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-2.9c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3C3.4 21.4 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.2-1.7.4-2.4V6.7H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.3l4-3z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4C17.9 1.2 15.2 0 12 0 7.4 0 3.4 2.6 1.4 6.7l4 3C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+              Share on Google
+            </a>
+          </div>
+          <div class="rv-divider"></div>
+          <div class="rv-foot">
+            Sent by <strong>${BUSINESS}</strong> via <strong>Fylo</strong>.<br>
+            Reply to the email and it goes straight to the team.
+          </div>
+        `}
+      </div>
+    </div>`;
+}
+
+function render(){
+  const screenEl = document.getElementById("screen");
+  if (state.screen === "email") screenEl.innerHTML = renderEmail();
+  else if (state.screen === "rate") screenEl.innerHTML = renderRate();
+  else if (state.screen === "thanks") screenEl.innerHTML = renderThanks();
+
+  // tab actives
+  document.querySelectorAll(".phone-tools button[data-go]").forEach(b => {
+    b.classList.toggle("active", b.dataset.go === state.screen);
+  });
+
+  wireScreen();
+}
+
+function wireScreen(){
+  if (state.screen === "email") {
+    const btn = document.getElementById("email-cta");
+    if (btn) btn.onclick = () => { state.screen = "rate"; render(); };
+  }
+  if (state.screen === "rate") {
+    const stars = document.getElementById("rv-stars");
+    if (stars) {
+      stars.addEventListener("mouseleave", () => { state.hover = 0; updateRateUI(); });
+      stars.querySelectorAll(".rv-star-zone").forEach(zone => {
+        zone.addEventListener("mouseenter", () => {
+          state.hover = parseFloat(zone.dataset.r);
+          updateRateUI();
+        });
+        zone.addEventListener("click", () => {
+          state.rating = parseFloat(zone.dataset.r);
+          state.hover = 0;
+          updateRateUI();
+        });
+      });
+    }
+    const send = document.getElementById("rv-send");
+    if (send) send.onclick = () => { if (!send.disabled) { state.screen = "thanks"; render(); } };
+  }
+  if (state.screen === "thanks") {
+    const fb = document.getElementById("rv-feedback");
+    if (fb) fb.oninput = () => { state.feedback = fb.value; render(); };
+    const g = document.getElementById("google-btn");
+    if (g) g.onclick = (e) => { e.preventDefault(); alert("In the real flow, this opens your Google review URL in a new tab."); };
+  }
+}
+
+// Update just the rate-screen pieces that change on hover/click (stars, hint, CTA).
+// Avoids the full innerHTML rebuild render() does, which was causing visible
+// flicker on rapid hover events.
+function updateRateUI(){
+  if (state.screen !== "rate") return;
+  const active = state.hover || state.rating;
+  const hintIdx = active ? Math.ceil(active) : 0;
+  const cells = document.querySelectorAll("#rv-stars .rv-star-cell");
+  cells.forEach((cell, i) => {
+    const slot = i + 1;
+    const pct = active >= slot ? 100 : active === slot - 0.5 ? 50 : 0;
+    const isLit = active >= slot;
+    const locked = !state.hover && Math.ceil(state.rating) === slot;
+    cell.classList.toggle("is-lit", isLit);
+    cell.classList.toggle("is-locked", locked);
+    let fill = cell.querySelector(".rv-star-fill");
+    if (pct > 0) {
+      if (!fill) {
+        fill = document.createElement("div");
+        fill.className = "rv-star-fill";
+        fill.innerHTML = starSvg(true);
+        const firstZone = cell.querySelector(".rv-star-zone");
+        cell.insertBefore(fill, firstZone);
+      }
+      fill.style.clipPath = "inset(0 " + (100 - pct) + "% 0 0)";
+    } else if (fill) {
+      fill.remove();
+    }
+  });
+  const hint = document.querySelector(".rv-hint");
+  if (hint) {
+    hint.textContent = HINTS[hintIdx];
+    hint.classList.toggle("is-active", !!active);
+  }
+  const send = document.getElementById("rv-send");
+  if (send) {
+    if (state.rating) {
+      send.classList.add("is-ready"); send.classList.remove("is-idle");
+      send.disabled = false;
+      send.innerHTML = "Send " + formatRating(state.rating) + "-star review " +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+    } else {
+      send.classList.add("is-idle"); send.classList.remove("is-ready");
+      send.disabled = true;
+      send.innerHTML = "Pick a rating first";
+    }
+  }
+}
+
+// Tab + replay
+document.querySelectorAll(".phone-tools button[data-go]").forEach(b => {
+  b.addEventListener("click", () => {
+    state.screen = b.dataset.go;
+    // default rating so screen 3 isn't empty if user jumps there
+    if (state.screen === "thanks" && !state.rating) state.rating = 5;
+    render();
+  });
+});
+document.getElementById("btn-replay").addEventListener("click", () => {
+  state = { screen: "email", rating: 0, hover: 0, feedback: "" };
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

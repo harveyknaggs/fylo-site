@@ -1,0 +1,426 @@
+/* fuel-card.css — Fuel Employee card ported from fuel-employee-card.html
+   downloaded handoff. All class names already carry a `fuel-` prefix.
+   The design's `:root` vars are scoped to `.fuel-employee-card` so its
+   --blue/--ink/--muted/--line don't override the marketing site globals. */
+
+.fuel-employee-card {
+  --paper: #ffffff;
+  --ink: #0f172a;
+  --muted: #4d5d73;
+  --faded: #8fa1b8;
+  --line: rgba(0, 132, 199, 0.13);
+  --line-strong: rgba(0, 132, 199, 0.24);
+  --blue: #0088c8;
+  --blue-2: #00a3e8;
+  --blue-deep: #006fa4;
+  --cyan: #dff4ff;
+  --teal: #26c6a8;
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 32px 72px -44px rgba(15, 23, 42, 0.32);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+.fuel-employee-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 42px 82px -42px rgba(0, 136, 200, 0.36);
+}
+
+.fuel-card-visual {
+  position: relative;
+  height: 264px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(0, 163, 232, 0.18), transparent 48%),
+    linear-gradient(180deg, #f9fdff 0%, #eef9ff 100%);
+}
+.fuel-card-visual::before { display: none; }
+
+.fuel-status-badge {
+  position: absolute;
+  z-index: 6;
+  top: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: #0f766e;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 30px -24px rgba(15, 23, 42, 0.38);
+  backdrop-filter: blur(12px);
+  font-size: 11px;
+  font-weight: 850;
+}
+.fuel-status-badge i,
+.fuel-live i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.35);
+  animation: fuelPulse 1800ms ease-in-out infinite;
+}
+@keyframes fuelPulse {
+  50% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
+}
+
+.fuel-card-shell {
+  position: relative;
+  z-index: 2;
+  width: 288px;
+  height: 176px;
+  filter: drop-shadow(0 26px 30px rgba(0, 111, 164, 0.14));
+}
+.fuel-card-shell::before,
+.fuel-card-shell::after { display: none; }
+
+/* The credit-card-style mini cards. Scoped under .fuel-employee-card
+   so .fuel-card (a generic-looking class) can't collide elsewhere. */
+.fuel-employee-card .fuel-card {
+  position: absolute;
+  left: 42px;
+  top: 22px;
+  width: 204px;
+  height: 126px;
+  border-radius: 19px;
+  padding: 16px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 84% 16%, rgba(255, 255, 255, 0.28), transparent 24%),
+    linear-gradient(135deg, #0284c7, #00a3e8 54%, #26c6a8);
+  box-shadow: 0 28px 44px -28px rgba(0, 111, 164, 0.78);
+  transform-style: preserve-3d;
+  animation-duration: 9000ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+.fuel-employee-card .fuel-card:nth-child(1) { animation-name: fuelCardFront; }
+.fuel-employee-card .fuel-card:nth-child(2) {
+  background: linear-gradient(135deg, #0f766e, #14b8a6 56%, #60a5fa);
+  animation-name: fuelCardRight;
+}
+.fuel-employee-card .fuel-card:nth-child(3) {
+  background: linear-gradient(135deg, #075985, #0284c7 58%, #38bdf8);
+  animation-name: fuelCardLeft;
+}
+.fuel-employee-card .fuel-card::after {
+  content: "";
+  position: absolute;
+  inset: -28px -34px;
+  border-radius: inherit;
+  background: linear-gradient(108deg, transparent 0 40%, rgba(255, 255, 255, 0.28) 48%, transparent 56% 100%);
+  opacity: 0;
+  transform: translate3d(-86%, 0, 0) rotate(-5deg);
+  animation: fuelCardShine 9000ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.fuel-employee-card .fuel-card:nth-child(2)::after { animation-delay: 6030ms; }
+.fuel-employee-card .fuel-card:nth-child(3)::after { animation-delay: 3060ms; }
+
+.fuel-chip {
+  width: 28px;
+  height: 20px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.72);
+  margin-bottom: 18px;
+}
+.fuel-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  margin-bottom: 13px;
+}
+.fuel-meta {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+@keyframes fuelCardShine {
+  0%, 7%   { opacity: 0;   transform: translate3d(-86%, 0, 0) rotate(-5deg); }
+  11%      { opacity: 0.9; }
+  18%      { opacity: 0.9; }
+  24%      { opacity: 0;   transform: translate3d(86%, 0, 0) rotate(-5deg); }
+  25%,100% { opacity: 0;   transform: translate3d(86%, 0, 0) rotate(-5deg); }
+}
+@keyframes fuelCardFront {
+  0%, 24%  { opacity: 1;    transform: translate3d(0, -2px, 0)  rotate(-5deg)  scale(1);    z-index: 4; }
+  37%, 57% { opacity: 0.72; transform: translate3d(40px, 22px, 0) rotate(8deg)   scale(0.88); z-index: 2; }
+  70%, 90% { opacity: 0.52; transform: translate3d(-38px, 24px, 0) rotate(-12deg) scale(0.84); z-index: 1; }
+  100%     { opacity: 1;    transform: translate3d(0, -2px, 0)  rotate(-5deg)  scale(1);    z-index: 4; }
+}
+@keyframes fuelCardRight {
+  0%, 24%  { opacity: 0.72; transform: translate3d(40px, 22px, 0)  rotate(8deg)   scale(0.88); z-index: 2; }
+  37%, 57% { opacity: 0.52; transform: translate3d(-38px, 24px, 0) rotate(-12deg) scale(0.84); z-index: 1; }
+  70%, 90% { opacity: 1;    transform: translate3d(0, -2px, 0)     rotate(-5deg)  scale(1);    z-index: 4; }
+  100%     { opacity: 0.72; transform: translate3d(40px, 22px, 0)  rotate(8deg)   scale(0.88); z-index: 2; }
+}
+@keyframes fuelCardLeft {
+  0%, 24%  { opacity: 0.52; transform: translate3d(-38px, 24px, 0) rotate(-12deg) scale(0.84); z-index: 1; }
+  37%, 57% { opacity: 1;    transform: translate3d(0, -2px, 0)     rotate(-5deg)  scale(1);    z-index: 4; }
+  70%, 90% { opacity: 0.72; transform: translate3d(40px, 22px, 0)  rotate(8deg)   scale(0.88); z-index: 2; }
+  100%     { opacity: 0.52; transform: translate3d(-38px, 24px, 0) rotate(-12deg) scale(0.84); z-index: 1; }
+}
+
+.fuel-card-body {
+  padding: 24px 24px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.fuel-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+}
+.fuel-employee-card .fuel-card-body h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  font-family: inherit;
+  font-weight: 700;
+}
+.fuel-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 27px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: #15803d;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  flex: 0 0 auto;
+}
+
+.fuel-subtitle {
+  color: #0f766e;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 720;
+  margin: 0 0 11px;
+}
+.fuel-subtitle em,
+.fuel-cta em {
+  font-family: 'Instrument Serif', Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.fuel-subtitle em { color: #14b8a6; }
+
+.fuel-desc {
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.58;
+  margin: 0 0 16px;
+}
+
+.fuel-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 15px;
+}
+.fuel-stat {
+  min-width: 0;
+  padding: 11px 10px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f6fcff, #eaf7ff);
+  border: 1px solid rgba(0, 136, 200, 0.09);
+}
+.fuel-stat strong {
+  display: block;
+  font-family: 'Instrument Serif', Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  line-height: 1;
+  font-style: italic;
+  color: var(--blue);
+  white-space: nowrap;
+}
+.fuel-stat span {
+  display: block;
+  margin-top: 7px;
+  color: var(--faded);
+  font-size: 8.5px;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fuel-mini-list {
+  display: grid;
+  gap: 8px;
+  padding: 13px 0 15px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 15px;
+}
+.fuel-mini-item {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 9px;
+  align-items: center;
+  min-height: 34px;
+  color: var(--muted);
+  font-size: 11px;
+  min-width: 0;
+}
+.fuel-mini-item svg {
+  width: 28px;
+  height: 28px;
+  padding: 7px;
+  border-radius: 9px;
+  color: var(--blue);
+  background: var(--cyan);
+  stroke-width: 2.2;
+}
+.fuel-mini-item b {
+  display: block;
+  color: var(--ink);
+  font-size: 12.5px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.fuel-tag {
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: rgba(0, 136, 200, 0.08);
+  color: var(--blue-deep);
+  font-size: 9.5px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.fuel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.fuel-powered {
+  color: var(--faded);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.fuel-integrations {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.fuel-int-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 22px;
+}
+.fuel-int {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex: 0 0 auto;
+}
+.fuel-int svg { width: 12px; height: 12px; stroke-width: 2.4; }
+.fuel-int.card-provider { background: var(--blue); }
+.fuel-int.xero          { background: #13b5ea; }
+
+.fuel-cta {
+  margin-top: auto;
+  width: 100%;
+  min-height: 47px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px 9px 18px;
+  font-size: 13.5px;
+  font-weight: 850;
+  font-family: inherit;
+  box-shadow: 0 15px 30px -22px rgba(15, 118, 110, 0.9);
+  transition: transform 220ms ease;
+}
+.fuel-employee-card:hover .fuel-cta { transform: translateY(-1px); }
+.fuel-cta em { color: rgba(255, 255, 255, 0.85); }
+.fuel-cta > span:last-child {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: #0f766e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 220ms ease;
+}
+.fuel-employee-card:hover .fuel-cta > span:last-child { transform: translateX(3px); }
+.fuel-cta svg { width: 16px; height: 16px; stroke-width: 2.5; }
+
+@media (max-width: 520px) {
+  .fuel-card-visual { height: 236px; }
+  .fuel-card-body { padding: 20px 18px; }
+  .fuel-stats { grid-template-columns: 1fr; }
+  .fuel-footer { flex-direction: column; align-items: flex-start; gap: 9px; }
+  .fuel-integrations { justify-content: flex-start; }
+  .fuel-mini-item { grid-template-columns: 28px 1fr; }
+  .fuel-tag { grid-column: 2; justify-self: start; }
+  .fuel-card-shell { transform: scale(0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fuel-status-badge i,
+  .fuel-live i,
+  .fuel-employee-card .fuel-card,
+  .fuel-employee-card .fuel-card::after {
+    animation: none !important;
+  }
+}
