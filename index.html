@@ -250,15 +250,22 @@
       .vs-grid { grid-template-columns: 1fr; gap: 64px; }
       .vs-badge::before, .vs-badge::after { display: none; }
       body > nav { padding: 14px 20px; }
-      .stage { height: auto; }
-      .stage-pin { position: static; height: auto; padding: 86px 0 30px; overflow: visible; }
-      .stage-grid { display: block; padding-right: 0; }
-      .stage-text { position: static; width: auto; }
-      .text-layer { position: static; opacity: 1 !important; transform: none !important; padding: 0 22px; }
-      .emp-layer { margin-top: 46px; }
-      .stage-hex { margin-top: 10px; }
-      .stage-hex video { height: 46vh; max-width: 92vw; }
-      .scroll-hint { display: none; }
+
+      /* Hero stays pinned + scroll-interactive on mobile (text cross-fades,
+         hexagon spins). Layout flips from side-by-side to a vertical stack:
+         text overlays the top of the viewport, hexagon centred below. */
+      .stage { height: 200vh; }
+      .stage-grid { display: block; padding: 0; height: 100%; position: relative; }
+      .stage-text { position: absolute; top: 86px; left: 0; right: 0; width: auto; height: auto; }
+      .text-layer { position: absolute; inset: 0; padding: 0 22px; justify-content: flex-start; }
+      .hero-layer h1 { font-size: clamp(32px, 8.4vw, 46px); }
+      .hero-layer p { font-size: 14.5px; max-width: 90%; margin-top: 18px; }
+      .emp-layer h2 { font-size: clamp(36px, 9.4vw, 52px); }
+      .emp-layer .emp-sub { font-size: 14.5px; margin-top: 18px; max-width: 90%; }
+      .kicker, .emp-kicker { font-size: 14px; letter-spacing: .3em; margin-bottom: 16px; }
+      .stage-hex { position: absolute; left: 0; right: 0; bottom: 6vh; height: 50vh; align-items: flex-end; justify-content: center; }
+      .stage-hex video { width: auto; height: 100%; max-width: 88vw; }
+
       .employees { margin-top: 0; padding: 30px 22px 90px; }
       .emp-cards { grid-template-columns: 1fr; }
       .ecard { gap: 16px; padding: 22px; }
@@ -272,9 +279,13 @@
       .brand .wordmark { font-size: 22px; }
       .nav-cta { padding: 8px 14px; font-size: 13px; }
 
-      .stage-hex video { height: 38vh; max-width: 88vw; }
+      .stage { height: 220vh; }
+      .stage-hex { bottom: 4vh; height: 44vh; }
+      .stage-hex video { height: 100%; max-width: 86vw; }
       .text-layer { padding: 0 18px; }
-      .kicker, .emp-kicker { font-size: 16px; letter-spacing: .3em; }
+      .hero-layer h1 { font-size: clamp(28px, 8.8vw, 40px); }
+      .emp-layer h2 { font-size: clamp(32px, 9.6vw, 44px); }
+      .kicker, .emp-kicker { font-size: 12px; letter-spacing: .28em; margin-bottom: 14px; }
 
       .employees { padding: 24px 16px 70px; }
 
