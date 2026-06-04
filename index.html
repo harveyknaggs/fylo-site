@@ -33,7 +33,7 @@
     a { color: inherit; }
 
     /* ---------- Nav ---------- */
-    nav {
+    body > nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center;
       padding: 18px 40px;
@@ -184,7 +184,7 @@
     .future-hex video { width: min(420px, 100%); height: auto; display: block; mix-blend-mode: multiply; }
 
     /* hexagon header / cta icons */
-    .hexico { width: 46px; height: 46px; flex: 0 0 auto; display: grid; place-items: center; position: relative;
+    .hexico { width: 46px; height: 53px; flex: 0 0 auto; display: grid; place-items: center; position: relative;
       clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
     .hexico svg { width: 20px; height: 20px; position: relative; z-index: 1; }
     .hexico.grey { background: #e9ebef; color: #9aa4b6; }
@@ -229,17 +229,7 @@
     .vs-badge::before { right: 100%; margin-right: 4px; }
     .vs-badge::after { left: 100%; margin-left: 4px; }
 
-    /* bottom CTA bar */
-    .future-cta { margin-top: 30px; display: flex; align-items: center; gap: 22px; padding: 26px 32px; border-radius: 22px;
-      background: linear-gradient(160deg, #ffffff, #fafbfc); border: 1px solid rgba(20,30,60,.08); box-shadow: 0 16px 44px -28px rgba(30,45,90,.22); }
-    .future-cta .cta-copy { flex: 1 1 auto; min-width: 0; }
-    .future-cta .cta-copy b { display: block; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
-    .future-cta .cta-copy p { margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 520px; }
-    .future-cta .cta-link { margin-left: auto; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 9px; color: var(--teal); font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; transition: gap .2s; }
-    .future-cta .cta-link:hover { gap: 13px; }
-    .future-cta .cta-link svg { width: 18px; height: 18px; }
-
-    @media (max-width: 760px) {
+@media (max-width: 760px) {
       .future { padding: 60px 20px 70px; }
       .future-top { grid-template-columns: 1fr; gap: 22px; margin-top: 0; margin-bottom: 36px; }
       .future-head { margin-top: 0; }
@@ -247,9 +237,7 @@
       .future-hex video { width: 70vw; max-width: 300px; }
       .vs-grid { grid-template-columns: 1fr; gap: 64px; }
       .vs-badge::before, .vs-badge::after { display: none; }
-      .future-cta { flex-direction: column; align-items: flex-start; gap: 14px; padding: 24px; }
-      .future-cta .cta-link { margin-left: 0; }
-      nav { padding: 14px 20px; }
+      body > nav { padding: 14px 20px; }
       .stage { height: auto; }
       .stage-pin { position: static; height: auto; padding: 86px 0 30px; overflow: visible; }
       .stage-grid { display: block; padding-right: 0; }
@@ -263,6 +251,106 @@
       .emp-cards { grid-template-columns: 1fr; }
       .ecard { gap: 16px; padding: 22px; }
       .ecard p { max-width: none; }
+    }
+
+    /* Shared dark-theme tokens for CTA + footer */
+    .aurora-cta-section, .foot {
+      --foot-display: "Fraunces", "Times New Roman", serif;
+      --foot-mono: "Geist Mono", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --foot-teal: #2dd4bf;
+      --foot-sienna: #f0813f;
+    }
+
+    /* ====== Standalone CTA section (light teal aurora — page content) ====== */
+    .aurora-cta-section {
+      position: relative; isolation: isolate; overflow: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse 70% 38% at 50% 0%, rgba(45,212,191,0.18), transparent 70%),
+        radial-gradient(ellipse 50% 24% at 18% 18%, rgba(20,184,166,0.10), transparent 75%),
+        radial-gradient(ellipse 60% 26% at 84% 22%, rgba(15,118,110,0.10), transparent 78%),
+        radial-gradient(ellipse 80% 40% at 50% 100%, rgba(45,212,191,0.10), transparent 70%),
+        linear-gradient(180deg, #fbfefd 0%, #f1faf7 55%, #ebf6f2 100%);
+    }
+    .aurora-cta {
+      max-width: 1100px; margin: 0 auto; padding: clamp(96px, 12vw, 160px) 6vw clamp(96px, 12vw, 160px);
+      text-align: center; position: relative;
+    }
+    .aurora-eyebrow {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-family: var(--foot-mono);
+      font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+      color: #0f766e; margin-bottom: 26px;
+    }
+    .aurora-eyebrow::before { content: ""; width: 28px; height: 1px; background: #0f766e; opacity: .55; }
+    .aurora-cta h2 {
+      font-size: clamp(40px, 5.4vw, 72px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.04;
+      color: var(--text); margin: 0 auto; max-width: 900px;
+    }
+    .aurora-cta h2 .serif {
+      font-family: var(--foot-display); font-style: italic; font-weight: 400; letter-spacing: -0.01em;
+      background: linear-gradient(110deg, #14b8a6, #0f766e 60%, #0c5f55);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .aurora-cta .lead {
+      margin: 24px auto 40px; max-width: 560px;
+      font-size: 17px; line-height: 1.62; color: var(--muted);
+    }
+    .aurora-actions { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .aurora-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600; letter-spacing: -0.005em; text-decoration: none;
+      padding: 16px 26px; border-radius: 999px;
+      transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, background .25s, border-color .25s;
+    }
+    .aurora-btn.primary {
+      background: linear-gradient(135deg, #14b8a6, #0f766e);
+      color: #ffffff;
+      box-shadow: 0 18px 40px -14px rgba(15,118,110,0.45);
+    }
+    .aurora-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 24px 50px -14px rgba(15,118,110,0.6); }
+    .aurora-btn.primary .arw { transition: transform .25s; }
+    .aurora-btn.primary:hover .arw { transform: translateX(3px); }
+    .aurora-btn.ghost {
+      color: var(--text); border: 1px solid rgba(11,16,32,0.14);
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(8px);
+    }
+    .aurora-btn.ghost:hover { background: #ffffff; border-color: rgba(11,16,32,0.28); }
+
+    /* ====== Standalone footer (solid deep teal, separate from CTA) ====== */
+    .foot {
+      padding: clamp(56px, 8vw, 88px) 0 clamp(40px, 6vw, 56px);
+      position: relative;
+      color: #e6f2ee;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 0%, rgba(15,118,110,0.18), transparent 70%),
+        linear-gradient(180deg, #03100e 0%, #020806 100%);
+    }
+    .foot .foot-inner {
+      max-width: 1300px; margin: 0 auto; padding: 0 6vw;
+      display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center;
+    }
+    .foot-brand-mark {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-family: var(--foot-display);
+      font-size: 30px; font-weight: 500; letter-spacing: -0.02em;
+      color: #ffffff; text-decoration: none;
+    }
+    .foot-brand-mark svg { width: 44px; height: 44px; display: block; filter: drop-shadow(0 4px 18px rgba(45,212,191,0.35)); }
+    .foot-brand-mark .dot { color: var(--foot-sienna); }
+    .foot-links {
+      display: flex; gap: clamp(20px, 4vw, 40px); flex-wrap: wrap; justify-content: center;
+      font-family: var(--foot-mono);
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .foot-links a {
+      color: rgba(230,242,238,0.62); text-decoration: none;
+      transition: color 200ms ease;
+    }
+    .foot-links a:hover { color: var(--foot-teal); }
+    .foot-base {
+      font-family: var(--foot-mono);
+      font-size: 11px; letter-spacing: 0.08em; color: rgba(230,242,238,0.4);
     }
   </style>
 </head>
@@ -309,13 +397,8 @@
   </div>
 
   <!-- Cards directly under the heading -->
-  <section class="employees">
+  <section class="employees" id="employees">
     <div class="emp-grid">
-      <header class="emp-head reveal">
-        <span class="emp-eyebrow">Your AI workforce</span>
-        <h2 class="emp-title">Meet the <span class="emp-serif">AI employees.</span></h2>
-        <p class="emp-lead">Each one quietly handles a part of your business. Bills, reviews, calls, fuel. So you can focus on the work that pays.</p>
-      </header>
       <div class="emp-cards">
         <a class="stl-card reveal" href="showcase/reviews-about.html">
           <div class="stl-stage">
@@ -602,15 +685,6 @@
         <div class="vs-badge">VS</div>
       </div>
 
-      <!-- bottom CTA -->
-      <div class="future-cta reveal">
-        <span class="hexico outline"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l1.9 6.6 6.6 1.9-6.6 1.9L12 19.2l-1.9-6.6L3.5 10.7l6.6-1.9z"/></svg></span>
-        <div class="cta-copy">
-          <b>The future belongs to businesses that embrace AI.</b>
-          <p>Fylo gives you the AI employees you need to save time, impress customers and grow.</p>
-        </div>
-        <a class="cta-link" href="#">Book a demo today <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
     </div>
   </section>
 
@@ -706,5 +780,45 @@
       }, 6000);
     })();
   </script>
+
+  <!-- Standalone CTA section -->
+  <section class="aurora-cta-section">
+    <div class="aurora-cta">
+      <span class="aurora-eyebrow">Ready when you are</span>
+      <h2>Book a call or <span class="serif">sign up today.</span></h2>
+      <p class="lead">Set up your first AI employee in minutes. We'll walk you through it, or you can dive in on your own.</p>
+      <div class="aurora-actions">
+        <a class="aurora-btn primary" href="https://fylo.co.nz/signup">Sign up today <span class="arw">&rarr;</span></a>
+        <a class="aurora-btn ghost" href="mailto:hello@fylo.co.nz?subject=Book%20a%20call%20with%20Fylo">Book a call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Standalone footer -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <a href="#" class="foot-brand-mark" aria-label="Fylo home">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <linearGradient id="foot-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#5eead4"/>
+              <stop offset="100%" stop-color="#0f766e"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#foot-grad)" fill-rule="evenodd" d="M 50 10 L 84.64 30 L 84.64 70 L 50 90 L 15.36 70 L 15.36 30 Z M 64 50 L 57 37.876 L 43 37.876 L 36 50 L 43 62.124 L 57 62.124 Z"/>
+        </svg>
+        <span>Fylo<span class="dot">.</span></span>
+      </a>
+
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#stage">Home</a>
+        <a href="#employees">Employees</a>
+        <a href="https://fylo.co.nz/privacy">Privacy</a>
+        <a href="https://fylo.co.nz/terms">Terms</a>
+      </nav>
+
+      <div class="foot-base">&copy; 2026 Fylo Limited &middot; fylo.co.nz</div>
+    </div>
+  </footer>
 </body>
 </html>
