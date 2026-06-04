@@ -265,6 +265,47 @@
       .ecard p { max-width: none; }
     }
 
+    /* Phone breakpoint — tighter spacing for ~360-540px viewports */
+    @media (max-width: 540px) {
+      body > nav { padding: 12px 16px; }
+      .brand svg { width: 28px; height: 28px; }
+      .brand .wordmark { font-size: 22px; }
+      .nav-cta { padding: 8px 14px; font-size: 13px; }
+
+      .stage-hex video { height: 38vh; max-width: 88vw; }
+      .text-layer { padding: 0 18px; }
+      .kicker, .emp-kicker { font-size: 16px; letter-spacing: .3em; }
+
+      .employees { padding: 24px 16px 70px; }
+
+      .future { padding: 56px 18px 64px; }
+      .future-head h2 { font-size: 32px; }
+      .future-head p { font-size: 15px; }
+      .future-hex video { width: 60vw; max-width: 240px; }
+      .vs-grid { gap: 32px; }
+      .vs-badge { display: none; }
+      .vs-card { padding: 22px 18px 20px; }
+      .vs-head h3 { font-size: 17px; }
+
+      .aurora-cta { padding: 80px 18px 80px; }
+      .aurora-eyebrow { font-size: 11px; letter-spacing: .22em; margin-bottom: 20px; }
+      .aurora-cta h2 { font-size: 36px; }
+      .aurora-cta .lead { font-size: 15.5px; margin: 22px auto 30px; }
+      .aurora-actions { gap: 10px; width: 100%; }
+      .aurora-btn { padding: 14px 20px; font-size: 14.5px; }
+      .aurora-btn.primary, .aurora-btn.ghost { flex: 1 1 auto; justify-content: center; }
+
+      .foot { padding: 48px 0 36px; }
+      .foot .foot-inner { padding: 0 20px; gap: 22px; }
+      .foot-brand-mark { font-size: 26px; gap: 11px; }
+      .foot-brand-mark svg { width: 38px; height: 38px; }
+      .foot-links { gap: 18px; font-size: 11px; }
+      .foot-base { font-size: 10.5px; }
+
+      /* Coming soon pill — slightly tighter so it doesn't crowd the card title */
+      .coming-soon { padding: 3px 9px; font-size: 9.5px; }
+    }
+
     /* Shared dark-theme tokens for CTA + footer */
     .aurora-cta-section, .foot {
       --foot-display: "Fraunces", "Times New Roman", serif;
