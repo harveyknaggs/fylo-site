@@ -251,20 +251,20 @@
       .vs-badge::before, .vs-badge::after { display: none; }
       body > nav { padding: 14px 20px; }
 
-      /* Hero stays pinned + scroll-interactive on mobile (text cross-fades,
-         hexagon spins). Layout flips from side-by-side to a vertical stack:
-         text overlays the top of the viewport, hexagon centred below. */
-      .stage { height: 200vh; }
-      .stage-grid { display: block; padding: 0; height: 100%; position: relative; }
-      .stage-text { position: absolute; top: 86px; left: 0; right: 0; width: auto; height: auto; }
-      .text-layer { position: absolute; inset: 0; padding: 0 22px; justify-content: flex-start; }
+      /* Hero: clean static vertical stack on mobile — headline, copy, then a
+         centred floating hexagon. No pinned scroll-scrub (disabled in JS). */
+      .stage { height: auto; }
+      .stage-pin { position: static; height: auto; overflow: visible; }
+      .stage-grid { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 96px 0 10px; height: auto; position: static; }
+      .stage-text { position: static; width: auto; height: auto; }
+      .text-layer { position: static; inset: auto; opacity: 1 !important; transform: none !important; padding: 0 24px; justify-content: flex-start; }
+      .emp-layer { display: none; }
       .hero-layer h1 { font-size: clamp(32px, 8.4vw, 46px); }
-      .hero-layer p { font-size: 14.5px; max-width: 90%; margin-top: 18px; }
-      .emp-layer h2 { font-size: clamp(36px, 9.4vw, 52px); }
-      .emp-layer .emp-sub { font-size: 14.5px; margin-top: 18px; max-width: 90%; }
-      .kicker, .emp-kicker { font-size: 14px; letter-spacing: .3em; margin-bottom: 16px; }
-      .stage-hex { position: absolute; left: 0; right: 0; bottom: 6vh; height: 50vh; align-items: flex-end; justify-content: center; }
-      .stage-hex video { width: auto; height: 100%; max-width: 88vw; }
+      .hero-layer p { font-size: 15px; max-width: none; margin-top: 18px; }
+      .kicker { font-size: 14px; letter-spacing: .3em; margin-bottom: 16px; }
+      .stage-hex { position: static; height: auto; margin-top: 28px; align-items: center; justify-content: center; padding: 0 18px; }
+      .stage-hex video { width: 76vw; max-width: 330px; height: auto; max-height: none; }
+      .scroll-hint { display: none; }
 
       .employees { margin-top: 0; padding: 30px 22px 90px; }
       .emp-cards { grid-template-columns: 1fr; }
@@ -279,13 +279,13 @@
       .brand .wordmark { font-size: 22px; }
       .nav-cta { padding: 8px 14px; font-size: 13px; }
 
-      .stage { height: 220vh; }
-      .stage-hex { bottom: 4vh; height: 44vh; }
-      .stage-hex video { height: 100%; max-width: 86vw; }
+      .stage-grid { padding: 86px 0 6px; }
+      .stage-hex { margin-top: 20px; }
+      .stage-hex video { width: 80vw; max-width: 290px; }
       .text-layer { padding: 0 18px; }
       .hero-layer h1 { font-size: clamp(28px, 8.8vw, 40px); }
-      .emp-layer h2 { font-size: clamp(32px, 9.6vw, 44px); }
-      .kicker, .emp-kicker { font-size: 12px; letter-spacing: .28em; margin-bottom: 14px; }
+      .hero-layer p { font-size: 14.5px; }
+      .kicker { font-size: 12px; letter-spacing: .28em; margin-bottom: 14px; }
 
       .employees { padding: 24px 16px 70px; }
 
@@ -808,11 +808,9 @@
     let currentTime = 0;
     const clamp = (v) => Math.min(Math.max(v, 0), 1);
 
-    // Warm up the video so currentTime seeks work (some browsers require
-    // a play() before allowing seeks). Then immediately pause — scroll
-    // drives video.currentTime from here, not autoplay.
-    video.addEventListener('loadedmetadata', () => { videoReady = true; });
-    video.play().then(() => video.pause()).catch(() => {});
+    // Mobile reads far better as a clean static stack, so skip the scroll-
+    // scrub hero there. Desktop keeps the scroll-driven scrub + cross-fade.
+    const isMobileHero = window.matchMedia('(max-width: 760px)').matches;
 
     function onScroll() {
       const rect = stage.getBoundingClientRect();
@@ -850,10 +848,24 @@
       requestAnimationFrame(tick);
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    onScroll();
-    requestAnimationFrame(tick);
+    if (isMobileHero) {
+      // Static hero: float-loop a clean, centred hexagon (the seamless
+      // ping-pong clip) instead of scrubbing the zoom-reveal on scroll.
+      video.src = 'assets/hexagon-float-v3.mp4';
+      video.loop = true;
+      video.muted = true;
+      video.setAttribute('autoplay', '');
+      video.play().catch(() => {});
+    } else {
+      // Warm up the video so currentTime seeks work (some browsers require a
+      // play() before allowing seeks), then pause — scroll drives currentTime.
+      video.addEventListener('loadedmetadata', () => { videoReady = true; });
+      video.play().then(() => video.pause()).catch(() => {});
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+      requestAnimationFrame(tick);
+    }
 
     // cards fade in as they enter, just under the heading
     const io = new IntersectionObserver((entries) => {
