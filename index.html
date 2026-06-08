@@ -83,6 +83,7 @@
     /* right: spinning hexagon */
     .stage-hex { display: flex; align-items: center; justify-content: center; }
     .stage-hex video { width: auto; height: 84vh; max-width: 72vw; object-fit: contain; mix-blend-mode: multiply; }
+    .stage-hex-img { display: none; }  /* desktop uses the video; img is the mobile fallback */
 
     .scroll-hint {
       position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -263,7 +264,8 @@
       .hero-layer p { font-size: 15px; max-width: none; margin-top: 18px; }
       .kicker { font-size: 14px; letter-spacing: .3em; margin-bottom: 16px; }
       .stage-hex { position: static; height: auto; margin-top: 28px; align-items: center; justify-content: center; padding: 0 18px; }
-      .stage-hex video { width: 76vw; max-width: 330px; height: auto; max-height: none; }
+      .stage-hex video { display: none; }
+      .stage-hex-img { display: block; width: 76vw; max-width: 330px; height: auto; mix-blend-mode: multiply; }
       .scroll-hint { display: none; }
 
       .employees { margin-top: 0; padding: 30px 22px 90px; }
@@ -281,7 +283,7 @@
 
       .stage-grid { padding: 86px 0 6px; }
       .stage-hex { margin-top: 20px; }
-      .stage-hex video { width: 80vw; max-width: 290px; }
+      .stage-hex-img { width: 80vw; max-width: 290px; }
       .text-layer { padding: 0 18px; }
       .hero-layer h1 { font-size: clamp(28px, 8.8vw, 40px); }
       .hero-layer p { font-size: 14.5px; }
@@ -497,6 +499,7 @@
         </div>
         <div class="stage-hex" id="stageHex">
           <video id="scrubVideo" src="assets/hexpoo-teal5.mp4" muted playsinline preload="auto"></video>
+          <img class="stage-hex-img" src="assets/hexagon-hero.png" alt="" aria-hidden="true" />
         </div>
       </div>
     </div>
@@ -849,13 +852,10 @@
     }
 
     if (isMobileHero) {
-      // Static hero: float-loop a clean, centred hexagon (the seamless
-      // ping-pong clip) instead of scrubbing the zoom-reveal on scroll.
-      video.src = 'assets/hexagon-float-v3.mp4';
-      video.loop = true;
-      video.muted = true;
-      video.setAttribute('autoplay', '');
-      video.play().catch(() => {});
+      // No hero video on mobile — a static poster image (.stage-hex-img) is
+      // shown via CSS. Drop the source so the heavy clip never downloads.
+      video.removeAttribute('src');
+      video.load();
     } else {
       // Warm up the video so currentTime seeks work (some browsers require a
       // play() before allowing seeks), then pause — scroll drives currentTime.
